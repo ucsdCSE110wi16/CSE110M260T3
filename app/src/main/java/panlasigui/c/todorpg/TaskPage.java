@@ -1,6 +1,7 @@
 package panlasigui.c.todorpg;
 
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -25,15 +26,12 @@ public class TaskPage extends AppCompatActivity
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                confirmFireMissiles();
+                createTask();
             }
         });
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -86,11 +84,11 @@ public class TaskPage extends AppCompatActivity
         if (id == R.id.nav_inventory) {
             // Handle the camera action
         } else if (id == R.id.nav_profile) {
-
+            startActivity(new Intent(TaskPage.this, Profile.class));
         } else if (id == R.id.nav_tools) {
 
         } else if (id == R.id.nav_stats) {
-
+            startActivity(new Intent(TaskPage.this, Stats.class));
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -102,10 +100,10 @@ public class TaskPage extends AppCompatActivity
         return true;
     }
 
-    public void confirmFireMissiles() {
+    public void createTask() {
 
         DialogFragment newFragment = new FormDialog();
-        newFragment.show(getFragmentManager(), "missiles");
+        newFragment.show(getFragmentManager(), "New Task");
 
 
     }
