@@ -2,10 +2,19 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+    android:weightSum="1">
 
 
-        <EditText
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Create Task"
+        android:id="@+id/textView2"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
             android:id="@+id/username"
             android:inputType="text"
             android:layout_width="match_parent"
@@ -31,8 +40,17 @@
         android:layout_height="wrap_content"
         android:id="@+id/spinner" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Difficulty:"
+        android:id="@+id/textView3"
+        android:layout_gravity="center_horizontal" />
+
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
         android:id="@+id/ratingBar" />
+
 </LinearLayout>
