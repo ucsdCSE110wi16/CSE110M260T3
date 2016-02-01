@@ -22,7 +22,7 @@ public class FormDialog extends DialogFragment {
 
         View view = inflater.inflate(R.layout.form, null);
 
-        Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
+        Spinner spinner = (Spinner) view.findViewById(R.id.taskCategorySpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.skills_array, android.R.layout.simple_spinner_item);

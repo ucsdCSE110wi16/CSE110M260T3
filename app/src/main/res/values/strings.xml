@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TodoRpg</string>
+    <string name="app_name">ToDo Rpg</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -68,5 +68,9 @@
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_profile">Profile</string>
     <string name="title_activity_stats">stats</string>
+    <string name="taskNameHint">Task Name</string>
+    <string name="taskDescriptionHint">Description</string>
+    <string name="createTask">Create Task</string>
+    <string name="difficulty">Difficulty:</string>
 
 </resources>
