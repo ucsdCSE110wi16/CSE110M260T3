@@ -29,7 +29,7 @@ public class TaskPage extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createTask();
+                promptNewTask();
             }
         });
 
@@ -100,10 +100,15 @@ public class TaskPage extends AppCompatActivity
         return true;
     }
 
-    public void createTask() {
+    public void promptNewTask() {
 
         DialogFragment newFragment = new FormDialog();
         newFragment.show(getFragmentManager(), "New Task");
+
+    }
+
+    public void createTask(String taskName, String taskDesc, String category, float difficulty) {
+
 
 
     }
