@@ -79,5 +79,6 @@
     <string name="navStatsLabel">Stats</string>
     <string name="navProfileLabel">Profile</string>
     <string name="navToolsLabel">Tools</string>
+    <string name="datePickerText">End Date:</string>
 
 </resources>

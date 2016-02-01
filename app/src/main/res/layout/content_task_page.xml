@@ -12,13 +12,14 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_task_page"
-    tools:context="panlasigui.c.todorpg.TaskPage">
+    tools:context="panlasigui.c.todorpg.TaskPage"
+    android:id="@+id/taskBoard">
 
     <TextView
         android:text="@string/noTasksToShow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center_horizontal|center_vertical"
         android:textSize="28sp"
         />
 

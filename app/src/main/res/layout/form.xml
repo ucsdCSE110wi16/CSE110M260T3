@@ -4,7 +4,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:clickable="true"
+        android:focusableInTouchMode="true">
 
 
     <TextView
@@ -25,7 +27,8 @@
             android:layout_marginRight="4dp"
             android:layout_marginBottom="8dp"
             android:hint="@string/taskNameHint" />
-        <EditText
+
+    <EditText
             android:id="@+id/taskDescription"
             android:inputType="text"
             android:layout_width="match_parent"
@@ -34,7 +37,7 @@
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
             android:layout_marginBottom="16dp"
-            android:hint="@string/taskDescriptionHint"/>
+            android:hint="@string/taskDescriptionHint" />
 
     <Spinner
         android:layout_width="match_parent"
@@ -45,8 +48,35 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/datePickerText"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:id="@+id/datePickerLabel"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <DatePicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"></DatePicker>
+
+        <TimePicker
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:timePickerMode="spinner"></TimePicker>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/difficulty"
-        android:layout_marginTop="14dp"
+        android:layout_marginBottom="16dp"
         android:textSize="16sp"
         android:id="@+id/difficultyLabel"
         android:layout_gravity="center_horizontal" />

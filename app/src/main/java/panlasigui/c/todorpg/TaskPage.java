@@ -1,9 +1,11 @@
 package panlasigui.c.todorpg;
 
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class TaskPage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -109,7 +113,22 @@ public class TaskPage extends AppCompatActivity
 
     public void createTask(String taskName, String taskDesc, String category, float difficulty) {
 
+        LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = vi.inflate(R.layout.task, null);
 
+        // fill in any details dynamically here
+        TextView name = (TextView) v.findViewById(R.id.taskInstanceName);
+        name.setText(taskName);
+
+        TextView desc = (TextView) v.findViewById(R.id.taskInstanceDesc);
+        desc.setText(taskDesc);
+
+        TextView cat = (TextView) v.findViewById(R.id.taskInstanceCategory);
+        cat.setText(category);
+
+        // insert into main view
+        ViewGroup insertPoint = (ViewGroup) findViewById(R.id.taskBoard);
+        insertPoint.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
 
     }
 
