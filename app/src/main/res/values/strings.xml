@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ToDo Rpg</string>
+    <string name="app_name">ToDo RPG</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -72,5 +72,12 @@
     <string name="taskDescriptionHint">Description</string>
     <string name="createTask">Create Task</string>
     <string name="difficulty">Difficulty:</string>
+    <string name="noTasksToShow">No Tasks to Show!</string>
+    <string name="avatarName">Ixenbay</string>
+    <string name="avatarStatus">wat</string>
+    <string name="navInventoryLabel">Inventory</string>
+    <string name="navStatsLabel">Stats</string>
+    <string name="navProfileLabel">Profile</string>
+    <string name="navToolsLabel">Tools</string>
 
 </resources>

@@ -36,7 +36,7 @@
                 android:value="panlasigui.c.todorpg.TaskPage" />
         </activity>
         <activity
-            android:name=".Stats"
+            android:name=".Skills"
             android:label="@string/title_activity_stats"
             android:parentActivityName=".TaskPage"
             android:theme="@style/AppTheme.NoActionBar">
