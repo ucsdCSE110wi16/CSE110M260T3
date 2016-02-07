@@ -16,10 +16,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class TaskPage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+        ArrayList<TaskData> taskList;
+        public static ItemsAdapter<TaskData> itemsAdapter;
+        ListView lvItems;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -45,6 +52,13 @@ public class TaskPage extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        lvItems = (ListView) findViewById(R.id.lvItems);
+        taskList = new ArrayList<>();
+        itemsAdapter = new ItemsAdapter<>(this, taskList);
+        lvItems.setAdapter(itemsAdapter);
+
+
     }
 
     @Override

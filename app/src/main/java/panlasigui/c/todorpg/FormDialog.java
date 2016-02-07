@@ -1,5 +1,6 @@
 package panlasigui.c.todorpg;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -13,7 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Spinner;
-//import android.view.LayoutInflater;
+import android.view.LayoutInflater;
 
 /**
  * Wow what a cool program
@@ -24,6 +25,7 @@ public class FormDialog extends DialogFragment {
     private EditText taskDescription;
     private Spinner categorySpinner;
     private RatingBar difficultyBar;
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -46,32 +48,35 @@ public class FormDialog extends DialogFragment {
         categorySpinner.setAdapter(adapter);
 
 
-
-        // Get the layout inflater
-
-
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
+
         builder.setView(view)
-                // Add action buttons
+        // Add action buttons
+
                 .setPositiveButton(R.string.create, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        ((TaskPage)getActivity()).createTask(
+                        TaskData task = new TaskData (
                                 taskName.getText().toString(),
                                 taskDescription.getText().toString(),
                                 categorySpinner.getSelectedItem().toString(),
-                                difficultyBar.getRating());
+                                difficultyBar.getRating()); // returns float
+                        TaskPage.itemsAdapter.add(task); //array is in TaskPage?
+
+
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        FormDialog.this.getDialog().cancel();
+                        // User cancelled the dialog
                     }
                 });
 
-
         return builder.create();
     }
+
+
+
 }
 
