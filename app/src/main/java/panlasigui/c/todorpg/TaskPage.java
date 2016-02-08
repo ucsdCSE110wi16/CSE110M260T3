@@ -50,6 +50,8 @@ public class TaskPage extends AppCompatActivity implements
         //setupListViewListener();
 
 
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +71,7 @@ public class TaskPage extends AppCompatActivity implements
         navigationView.setNavigationItemSelectedListener(this);
 
         lvItems = (ListView) findViewById(R.id.lvItems);
+        lvItems.setDividerHeight(25);
         taskList = new ArrayList<>();
         itemsAdapter = new ItemsAdapter<>(this, taskList);
         lvItems.setAdapter(itemsAdapter);
@@ -78,6 +81,8 @@ public class TaskPage extends AppCompatActivity implements
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+
+
 
     @Override
     public void onBackPressed() {

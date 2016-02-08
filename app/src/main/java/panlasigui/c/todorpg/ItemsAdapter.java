@@ -35,12 +35,17 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
 
         Button buttonFail = (Button) convertView.findViewById(R.id.buttonFailTask);
         Button buttonComplete = (Button) convertView.findViewById(R.id.buttonCompleteTask);
+        //final TextView noTasks = (TextView) convertView.findViewById(R.id.noTasks);
 
         buttonFail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 remove(getItem(position));
                 notifyDataSetChanged();
+                /*
+                if(getCount() == 0 ) noTasks.setVisibility(View.VISIBLE);
+                else noTasks.setVisibility(View.GONE);
+                */
             }
 
         });
@@ -50,6 +55,10 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
             public void onClick(View v) {
                 remove(getItem(position));
                 notifyDataSetChanged();
+                /*
+                if(getCount() == 0 ) noTasks.setVisibility(View.VISIBLE);
+                else noTasks.setVisibility(View.GONE);
+                */
             }
 
         });
@@ -66,5 +75,7 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
 
         return convertView;
     }
+
+
 
 }
