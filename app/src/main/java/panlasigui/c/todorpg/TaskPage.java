@@ -3,6 +3,7 @@ package panlasigui.c.todorpg;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
@@ -16,17 +17,29 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
 import java.util.ArrayList;
 
-public class TaskPage extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-        ArrayList<TaskData> taskList;
-        public static ItemsAdapter<TaskData> itemsAdapter;
-        ListView lvItems;
+public class TaskPage extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener {
+    ArrayList<TaskData> taskList;
+    public static ItemsAdapter<TaskData> itemsAdapter;
+    ListView lvItems;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -34,6 +47,8 @@ public class TaskPage extends AppCompatActivity
         setContentView(R.layout.activity_task_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //setupListViewListener();
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -46,7 +61,7 @@ public class TaskPage extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-            this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -59,6 +74,9 @@ public class TaskPage extends AppCompatActivity
         lvItems.setAdapter(itemsAdapter);
 
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
@@ -124,27 +142,81 @@ public class TaskPage extends AppCompatActivity
         newFragment.show(getFragmentManager(), "New Task");
 
     }
+    /*
+    private void setupListViewListener() {
+        lvItems.setOnItemClickListener(
+                new ListView.OnItemClickListener() {
 
-    public void createTask(String taskName, String taskDesc, String category, float difficulty) {
 
-        LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = vi.inflate(R.layout.task, null);
+                    button1.setOnClickListener(this);
+                    button2.setOnClickListener(this);
 
-        // fill in any details dynamically here
-        TextView name = (TextView) v.findViewById(R.id.taskInstanceName);
-        name.setText(taskName);
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    }
 
-        TextView desc = (TextView) v.findViewById(R.id.taskInstanceDesc);
-        desc.setText(taskDesc);
+                    public boolean onClickFail(ItemsAdapter<TaskData> adapter,
+                                               View item, int pos, long id) {
+                        taskList.remove(pos);
+                        adapter.notifyDataSetChanged();
+                        return true;
 
-        TextView cat = (TextView) v.findViewById(R.id.taskInstanceCategory);
-        cat.setText(category);
+                    }
 
-        // insert into main view
-        ViewGroup insertPoint = (ViewGroup) findViewById(R.id.taskBoard);
-        insertPoint.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
+                    public boolean onClickComplete(ItemsAdapter<TaskData> adapter,
+                                                   View item, int pos, long id) {
+                        taskList.remove(pos);
+                        adapter.notifyDataSetChanged();
+                        return true;
+
+                    }
+
+                }
+
+
+        );
+
 
     }
+*/
 
+    @Override
+    public void onStart() {
+        super.onStart();
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "TaskPage Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://panlasigui.c.todorpg/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "TaskPage Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://panlasigui.c.todorpg/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
 }

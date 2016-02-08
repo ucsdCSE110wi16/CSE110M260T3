@@ -82,4 +82,6 @@
     <string name="datePickerText">End Date:</string>
     <string name="cancel_button">Cancel</string>
     <string name="create_button">Create</string>
+    <string name="task_failed">Failed</string>
+    <string name="task_complete">Complete</string>
 </resources>

@@ -35,10 +35,83 @@
         android:id="@+id/taskInstanceCategory"/>
 
     <RatingBar
+        style="?android:attr/ratingBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:isIndicator="true"
+        android:numStars="5"
         android:id="@+id/taskInstanceDiff"
         />
+    <!--
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/task_failed"
+        android:id="@+id/task_failed" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/task_complete"
+        android:id="@+id/task_complete"
+        android:layout_gravity="right" />
+    </LinearLayout>
+    -->
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        style="?android:buttonBarStyle">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:background="?android:attr/dividerVertical"
+            android:layout_alignParentTop="true"/>
+
+        <View
+            android:id="@+id/button_view"
+            android:layout_width="1dip"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dip"
+            android:layout_marginTop="4dip"
+            android:background="?android:attr/dividerVertical"
+            android:layout_centerHorizontal="true"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:id="@+id/buttonFailTask"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@id/button_view"
+            android:layout_toLeftOf="@id/button_view"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/task_failed"
+
+            android:layout_alignParentBottom="true"/>
+
+        <Button
+            android:id="@+id/buttonCompleteTask"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/task_complete"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@id/button_view"
+            android:layout_toRightOf="@id/button_view"/>
+    </RelativeLayout>
+
 </LinearLayout>
