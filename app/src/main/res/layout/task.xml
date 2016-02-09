@@ -12,8 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="task_name"
+        android:textStyle="bold"
         android:textSize="20sp"
-        android:padding="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:id="@+id/taskInstanceName"/>
 
     <TextView
@@ -22,7 +24,7 @@
         android:layout_gravity="center_horizontal"
         android:text="task_description"
         android:textSize="16sp"
-        android:layout_margin="8dp"
+        android:layout_margin="4dp"
         android:id="@+id/taskInstanceDesc"/>
 
     <TextView
@@ -31,7 +33,7 @@
         android:layout_gravity="center_horizontal"
         android:text="category"
         android:textSize="16sp"
-        android:layout_margin="8dp"
+        android:layout_margin="4dp"
         android:id="@+id/taskInstanceCategory"/>
 
     <RatingBar
@@ -41,27 +43,9 @@
         android:layout_gravity="center_horizontal"
         android:isIndicator="true"
         android:numStars="5"
-        android:id="@+id/taskInstanceDiff"
-        />
-    <!--
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/task_failed"
-        android:id="@+id/task_failed" />
+        android:layout_margin="12dp"
+        android:id="@+id/taskInstanceDiff" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/task_complete"
-        android:id="@+id/task_complete"
-        android:layout_gravity="right" />
-    </LinearLayout>
-    -->
     <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
