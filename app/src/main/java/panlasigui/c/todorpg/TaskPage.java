@@ -133,10 +133,6 @@ public class TaskPage extends AppCompatActivity implements
 
         } else if (id == R.id.nav_stats) {
             startActivity(new Intent(TaskPage.this, Skills.class));
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

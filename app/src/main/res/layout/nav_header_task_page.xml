@@ -10,11 +10,11 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:orientation="vertical"
     android:gravity="bottom"
-    android:weightSum="1">
+    android:weightSum="2">
 
     <ImageView
-        android:layout_width="91dp"
-        android:layout_height="77dp"
+        android:layout_width="180dp"
+        android:layout_height="144dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:src="@drawable/character"
         android:id="@+id/avatarImageNav"
