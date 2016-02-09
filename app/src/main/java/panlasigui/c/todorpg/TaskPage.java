@@ -3,6 +3,7 @@ package panlasigui.c.todorpg;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -70,8 +71,13 @@ public class TaskPage extends AppCompatActivity implements
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //ListView Customization
         lvItems = (ListView) findViewById(R.id.lvItems);
-        lvItems.setDividerHeight(25);
+        //int[] colors = {0, 0xFFFF0000, 0}; // red for the example
+        int[] colors = {0, 0, 0};
+        lvItems.setDivider(new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, colors));
+        lvItems.setDividerHeight(50);
+
         taskList = new ArrayList<>();
         itemsAdapter = new ItemsAdapter<>(this, taskList);
         lvItems.setAdapter(itemsAdapter);
