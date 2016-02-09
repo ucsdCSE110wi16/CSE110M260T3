@@ -1,6 +1,9 @@
 package panlasigui.c.todorpg;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.media.Rating;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,8 +43,7 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
         buttonFail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                remove(getItem(position));
-                notifyDataSetChanged();
+                confirmRemove(getContext(), position, "fail");
                 /*
                 if(getCount() == 0 ) noTasks.setVisibility(View.VISIBLE);
                 else noTasks.setVisibility(View.GONE);
@@ -53,8 +55,7 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
         buttonComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                remove(getItem(position));
-                notifyDataSetChanged();
+                confirmRemove(getContext(), position, "complete");
                 /*
                 if(getCount() == 0 ) noTasks.setVisibility(View.VISIBLE);
                 else noTasks.setVisibility(View.GONE);
@@ -76,6 +77,21 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
         return convertView;
     }
 
+    private void confirmRemove(Context c, final int pos, String s) {
+        new AlertDialog.Builder(c)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("CONFIRM")
+                .setMessage("Did you " + s + " this task?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        remove(getItem(pos));
+                        notifyDataSetChanged();
+                    }
 
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
 
 }
