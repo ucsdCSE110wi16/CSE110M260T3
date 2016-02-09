@@ -129,8 +129,8 @@ public class TaskPage extends AppCompatActivity implements
             // Handle the camera action
         } else if (id == R.id.nav_profile) {
             startActivity(new Intent(TaskPage.this, Profile.class));
-        } else if (id == R.id.nav_tools) {
-
+        } else if (id == R.id.nav_store) {
+            startActivity(new Intent(TaskPage.this, Store.class));
         } else if (id == R.id.nav_stats) {
             startActivity(new Intent(TaskPage.this, Skills.class));
         }

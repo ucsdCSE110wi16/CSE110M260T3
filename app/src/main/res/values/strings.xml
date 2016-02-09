@@ -78,10 +78,11 @@
     <string name="navInventoryLabel">Inventory</string>
     <string name="navStatsLabel">Stats</string>
     <string name="navProfileLabel">Profile</string>
-    <string name="navToolsLabel">Tools</string>
+    <string name="navStoreLabel">Store</string>
     <string name="datePickerText">End Date:</string>
     <string name="cancel_button">Cancel</string>
     <string name="create_button">Create</string>
     <string name="task_failed">Failed</string>
     <string name="task_complete">Complete</string>
+    <string name="title_activity_store">Store</string>
 </resources>
