@@ -11,10 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.view.LayoutInflater;
+import android.widget.Toast;
 
 /**
  * Wow what a cool program
@@ -51,29 +53,47 @@ public class FormDialog extends DialogFragment {
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
 
-        builder.setView(view)
+        final AlertDialog d = builder.setView(view)
         // Add action buttons
 
-                .setPositiveButton(R.string.create, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        TaskData task = new TaskData (
-                                taskName.getText().toString(),
-                                taskDescription.getText().toString(),
-                                categorySpinner.getSelectedItem().toString(),
-                                difficultyBar.getRating()); // returns float
-                        TaskPage.itemsAdapter.add(task); //array is in TaskPage?
-
-
-                    }
-                })
+                .setPositiveButton(R.string.create, null)
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
+                    public void onClick(DialogInterface dialog, int id) {}
+                })
+                .create();
+
+        d.setOnShowListener(new DialogInterface.OnShowListener() {
+
+            @Override
+            public void onShow(DialogInterface dialog) {
+
+                Button b = d.getButton(AlertDialog.BUTTON_POSITIVE);
+                b.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+                        String name = taskName.getText().toString();
+                        String desc = taskDescription.getText().toString();
+                        String cat = categorySpinner.getSelectedItem().toString();
+                        float diff = difficultyBar.getRating();
+
+                        if (name.equals("")) {
+                            Toast.makeText(getActivity(), "Task Name Required", Toast.LENGTH_SHORT).show();
+                        } else if (cat.equals("Category")) {
+                            Toast.makeText(getActivity(), "Category Required", Toast.LENGTH_SHORT).show();
+                        } else if (diff == 0) {
+                            Toast.makeText(getActivity(), "Difficulty Required", Toast.LENGTH_SHORT).show();
+                        } else {
+                            TaskData task = new TaskData(name, desc, cat, diff); // returns float
+                            TaskPage.itemsAdapter.add(task); //array is in TaskPage?
+                            d.dismiss();
+                        }
                     }
                 });
+            }
+        });
 
-        return builder.create();
+        return d;
     }
 
 
