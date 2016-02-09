@@ -42,7 +42,7 @@
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:layout_margin="4dp"
         android:id="@+id/taskCategorySpinner" />
 
 
@@ -79,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:text="@string/difficulty"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="20dp"
         android:textSize="16sp"
         android:id="@+id/difficultyLabel"
         android:layout_gravity="center_horizontal" />

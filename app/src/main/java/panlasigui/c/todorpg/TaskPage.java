@@ -50,9 +50,6 @@ public class TaskPage extends AppCompatActivity implements
         setSupportActionBar(toolbar);
         //setupListViewListener();
 
-
-
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -150,6 +147,7 @@ public class TaskPage extends AppCompatActivity implements
     public void promptNewTask() {
 
         DialogFragment newFragment = new FormDialog();
+        newFragment.setCancelable(false);
         newFragment.show(getFragmentManager(), "New Task");
 
     }
