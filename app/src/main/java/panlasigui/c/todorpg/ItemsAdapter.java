@@ -2,15 +2,18 @@ package panlasigui.c.todorpg;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.media.Rating;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -23,6 +26,8 @@ import java.util.ArrayList;
  */
 public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
 
+    private ItemsAdapterCallback callback;
+
     public ItemsAdapter(Context context, ArrayList<TaskData> tasks) {
         super(context, 0, tasks);
     }
@@ -33,7 +38,6 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
 
         if(convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.task, parent, false);
-
         }
 
         Button buttonFail = (Button) convertView.findViewById(R.id.buttonFailTask);
@@ -64,15 +68,31 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
 
         });
 
-        TextView taskName = (TextView) convertView.findViewById(R.id.taskInstanceName);
-        TextView taskDescription = (TextView) convertView.findViewById(R.id.taskInstanceDesc);
-        TextView taskCategory = (TextView) convertView.findViewById(R.id.taskInstanceCategory);
-        RatingBar taskDifficulty = (RatingBar) convertView.findViewById(R.id.taskInstanceDiff);
+        final LinearLayout taskBackground = (LinearLayout) convertView.findViewById(R.id.taskBackground);
+        final TextView taskName = (TextView) convertView.findViewById(R.id.taskInstanceName);
+        final TextView taskDescription = (TextView) convertView.findViewById(R.id.taskInstanceDesc);
+        final TextView taskCategory = (TextView) convertView.findViewById(R.id.taskInstanceCategory);
+        final RatingBar taskDifficulty = (RatingBar) convertView.findViewById(R.id.taskInstanceDiff);
 
         taskName.setText(task.getName());
         taskDescription.setText(task.getDescription());
         taskCategory.setText(task.getCategory());
         taskDifficulty.setRating(task.getDifficulty());
+
+        taskBackground.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(callback != null) {
+                    Bundle b = new Bundle();
+                    b.putString("tN", taskName.getText().toString());
+                    b.putString("tD", taskDescription.getText().toString());
+                    b.putString("tC", taskCategory.getText().toString());
+                    b.putFloat("diff", taskDifficulty.getRating());
+                    b.putInt("pos", position);
+                    callback.editTask(b);
+                }
+            }
+        });
 
         return convertView;
     }
@@ -92,6 +112,14 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+
+    public void setCallback(ItemsAdapterCallback callback){
+        this.callback = callback;
+    }
+
+    public interface ItemsAdapterCallback {
+        public void editTask(Bundle b);
     }
 
 }
