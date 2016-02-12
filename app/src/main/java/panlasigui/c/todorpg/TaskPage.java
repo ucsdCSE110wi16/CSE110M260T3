@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,9 +19,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,11 +31,13 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 
 public class TaskPage extends AppCompatActivity implements
-        NavigationView.OnNavigationItemSelectedListener {
-    ArrayList<TaskData> taskList;
+        NavigationView.OnNavigationItemSelectedListener, ItemsAdapter.ItemsAdapterCallback {
+
+    public static ArrayList<TaskData> taskList;
     public static ItemsAdapter<TaskData> itemsAdapter;
     ListView lvItems;
     /**
@@ -77,6 +82,7 @@ public class TaskPage extends AppCompatActivity implements
 
         taskList = new ArrayList<>();
         itemsAdapter = new ItemsAdapter<>(this, taskList);
+        itemsAdapter.setCallback(this);
         lvItems.setAdapter(itemsAdapter);
 
 
@@ -84,8 +90,6 @@ public class TaskPage extends AppCompatActivity implements
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
-
-
 
     @Override
     public void onBackPressed() {
@@ -144,9 +148,17 @@ public class TaskPage extends AppCompatActivity implements
 
         DialogFragment newFragment = new FormDialog();
         newFragment.setCancelable(false);
-        newFragment.show(getFragmentManager(), "New Task");
+        newFragment.show(getFragmentManager(), "Create Task");
 
     }
+
+    public void editTask(Bundle b) {
+        FormDialog newFragment = new FormDialog();
+        newFragment.setArguments(b);
+        newFragment.setCancelable(false);
+        newFragment.show(getFragmentManager(), "Edit Task");
+    }
+
     /*
     private void setupListViewListener() {
         lvItems.setOnItemClickListener(

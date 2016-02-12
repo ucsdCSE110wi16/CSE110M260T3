@@ -11,7 +11,7 @@
     <string name="autoLoginCheckbox">AUTO_LOGIN</string>
 
     <string name="action_settings">Settings</string>
-    <string name="create">create</string>
+    <string name="check">confirm</string>
     <string name="cancel">cancel</string>
     <string name="title_activity_settings">Settings</string>
 
