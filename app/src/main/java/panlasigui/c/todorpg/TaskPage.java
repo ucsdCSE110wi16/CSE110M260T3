@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -116,7 +117,27 @@ public class TaskPage extends AppCompatActivity implements
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_sortByName) {
+            Toast.makeText(this, "Sort by Name", Toast.LENGTH_SHORT).show();
+            //call sort
+            return true;
+        }
+
+        if (id == R.id.action_sortByDiff) {
+            Toast.makeText(this, "Sort by Diff", Toast.LENGTH_SHORT).show();
+            //call sort
+            return true;
+        }
+
+        if (id == R.id.action_sortByCat) {
+            Toast.makeText(this, "Sort by Cat", Toast.LENGTH_SHORT).show();
+            //call sort
+            return true;
+        }
+
+        if (id == R.id.action_sortByTime) {
+            Toast.makeText(this, "Sort by Time", Toast.LENGTH_SHORT).show();
+            //call sort
             return true;
         }
 
