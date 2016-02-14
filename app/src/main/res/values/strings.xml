@@ -7,7 +7,7 @@
     <string name="loginUsername">Username</string>
     <string name="promptPassword">Password: </string>
     <string name="loginButton">LOGIN</string>
-    <string name="newUserButton">NEW USER?</string>
+    <string name="newUserButton">REGISTER NEW USER</string>
     <string name="autoLoginCheckbox">AUTO_LOGIN</string>
 
     <string name="action_settings">Settings</string>
