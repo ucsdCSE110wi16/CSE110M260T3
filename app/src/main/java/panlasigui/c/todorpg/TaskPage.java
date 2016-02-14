@@ -34,6 +34,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class TaskPage extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener, ItemsAdapter.ItemsAdapterCallback {
@@ -46,7 +48,6 @@ public class TaskPage extends AppCompatActivity implements
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -118,25 +119,31 @@ public class TaskPage extends AppCompatActivity implements
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_sortByName) {
-            Toast.makeText(this, "Sort by Name", Toast.LENGTH_SHORT).show();
-            //call sort
+            Collections.sort(taskList, TaskData.compTaskName);
+            itemsAdapter.notifyDataSetChanged();
+            Toast.makeText(this, "Tasks have been sorted by Name", Toast.LENGTH_SHORT).show();
+
             return true;
         }
 
         if (id == R.id.action_sortByDiff) {
-            Toast.makeText(this, "Sort by Diff", Toast.LENGTH_SHORT).show();
-            //call sort
+            Collections.sort(taskList, TaskData.compTaskDiff);
+            itemsAdapter.notifyDataSetChanged();
+            Toast.makeText(this, "Tasks have been sorted by Difficulty", Toast.LENGTH_SHORT).show();
+
             return true;
         }
 
         if (id == R.id.action_sortByCat) {
-            Toast.makeText(this, "Sort by Cat", Toast.LENGTH_SHORT).show();
-            //call sort
+            Collections.sort(taskList, TaskData.compTaskCat);
+            itemsAdapter.notifyDataSetChanged();
+            Toast.makeText(this, "Tasks have been sorted by Category", Toast.LENGTH_SHORT).show();
+
             return true;
         }
 
         if (id == R.id.action_sortByTime) {
-            Toast.makeText(this, "Sort by Time", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Tasks have been sorted by Time", Toast.LENGTH_SHORT).show();
             //call sort
             return true;
         }
