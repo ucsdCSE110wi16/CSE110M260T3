@@ -15,10 +15,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import static android.widget.ProgressBar.*;
 
 /**
  * Created by Cameron on 2/6/2016.
@@ -105,6 +107,8 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
+                        stats.updateStat(getItem(pos).getCategory(), getItem(pos).getDifficulty());
                         remove(getItem(pos));
                         notifyDataSetChanged();
                     }

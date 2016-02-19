@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
+    <item android:id="@+id/action_sortByName"
+        android:title="@string/action_sortByName"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_sortByDiff"
+        android:title="@string/action_sortByDiff"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_sortByCat"
+        android:title="@string/action_sortByCat"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_sortByTime"
+        android:title="@string/action_sortByTime"
         android:orderInCategory="100"
         app:showAsAction="never" />
 </menu>

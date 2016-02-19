@@ -106,4 +106,10 @@
         completions."
     </string>
     <string name="autoLoginBox">Auto-Login</string>
+    <string name="statImage">statImage</string>
+
+    <string name="action_sortByName">Sort by Name</string>
+    <string name="action_sortByDiff">Sort by Difficulty</string>
+    <string name="action_sortByCat">Sort by Category</string>
+    <string name="action_sortByTime">Sort by Time</string>
 </resources>

@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -33,6 +34,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class TaskPage extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener, ItemsAdapter.ItemsAdapterCallback {
@@ -117,6 +120,33 @@ public class TaskPage extends AppCompatActivity implements
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+        if (id == R.id.action_sortByName) {
+            Collections.sort(taskList, TaskData.compTaskName);
+            itemsAdapter.notifyDataSetChanged();
+            Toast.makeText(this, "Tasks have been sorted by Name", Toast.LENGTH_SHORT).show();
+
+            return true;
+        }
+
+        if (id == R.id.action_sortByDiff) {
+            Collections.sort(taskList, TaskData.compTaskDiff);
+            itemsAdapter.notifyDataSetChanged();
+            Toast.makeText(this, "Tasks have been sorted by Difficulty", Toast.LENGTH_SHORT).show();
+
+            return true;
+        }
+
+        if (id == R.id.action_sortByCat) {
+            Collections.sort(taskList, TaskData.compTaskCat);
+            itemsAdapter.notifyDataSetChanged();
+            Toast.makeText(this, "Tasks have been sorted by Category", Toast.LENGTH_SHORT).show();
+
+            return true;
+        }
+
+        if (id == R.id.action_sortByTime) {
+            Toast.makeText(this, "Tasks have been sorted by Time", Toast.LENGTH_SHORT).show();
+            //call sort
             return true;
         }
 
