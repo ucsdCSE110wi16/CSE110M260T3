@@ -3,6 +3,8 @@ package panlasigui.c.todorpg;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -19,6 +21,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,11 +31,22 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.firebase.client.AuthData;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
+import com.firebase.client.ValueEventListener;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -57,6 +71,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +111,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void populateAutoComplete() {
@@ -111,7 +133,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
             Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(android.R.string.ok, new View.OnClickListener() {
+                    .setAction(android.R.string.ok, new OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
                         public void onClick(View v) {
@@ -160,12 +182,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         View focusView = null;
 
         // Check for a valid password
-        if (TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
             cancel = true;
-        }
-        else if(!isPasswordValid(password)) {
+        } else if (!isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -195,19 +216,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    //Methods to check validity of emails and password.
+
     private boolean isEmailValid(String email) {
         boolean validity = true;
-        if(email.length() < MIN_USERNAME_SIZE)
+        if (!email.contains("@"))
             validity = false;
         return validity;
 
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
+
         boolean validity = true;
         if (password.length() < MIN_PASSWORD_SIZE)
             validity = false;
+
         return validity;
     }
 
@@ -290,6 +314,46 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailView.setAdapter(adapter);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Login Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://panlasigui.c.todorpg/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Login Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://panlasigui.c.todorpg/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
+
 
     private interface ProfileQuery {
         String[] PROJECTION = {
@@ -307,6 +371,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
+        //Fields required to login.
         private final String mEmail;
         private final String mPassword;
 
@@ -317,25 +382,66 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
+            //Fire base reference for login and writting data.
+            final Firebase myFirebaseRef = new Firebase("https://todorpg.firebaseio.com/");
 
-            // TODO: attempt authentication against a network service.
+            // attempt authentication against a network service.
 
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
+            myFirebaseRef.authWithPassword(mEmail, mPassword, new Firebase.AuthResultHandler() {
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
+
+                @Override
+                public void onAuthenticated(AuthData authData) {
+                    System.out.println("Logged in: User ID: " + authData.getUid() + ", Provider: " + authData.getProvider());
+                    //Create an account for the data passed only the User ID.
+                    Account account = new Account("user", "pass", authData.getUid(),0);
+                    //Pass the account to the start of the task activity via intent.
+                    Intent i = new Intent(getApplicationContext(), TaskPage.class);
+                    i.putExtra("Account", account);
+                    finish();
+                    startActivity(i);
                 }
-            }
 
-            // TODO: register the new account here.
+                @Override
+                public void onAuthenticationError(FirebaseError firebaseError) {
+                    Toast.makeText(LoginActivity.this, "No Authentication",
+                            Toast.LENGTH_LONG).show();
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+                }
+            });
+
+            //  tr to register the new account here if could not authenciate.
+            myFirebaseRef.createUser(mEmail, mPassword, new Firebase.ValueResultHandler<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> result) {
+                    Account account = new Account(mEmail, mPassword, (String) result.get("uid"), 1);
+                    //Store Account data for success.
+                    Firebase ref = new Firebase("https://todorpg.firebaseio.com/Users").child(account.getUserID());
+                    ref.child("email").setValue(account.getUsername());
+                    ref.child("Password").setValue(account.getPassword());
+                    Toast.makeText(LoginActivity.this, "New User",
+                            Toast.LENGTH_LONG).show();
+                    //Start Task page activity.
+                    Intent i = new Intent(getApplicationContext(), TaskPage.class);
+                    i.putExtra("Account", account);
+                    finish();
+                    startActivity(i);
+                }
+
+                @Override
+                public void onError(FirebaseError firebaseError) {
+                    Toast.makeText(LoginActivity.this, "Could not make new User",
+                            Toast.LENGTH_LONG).show();
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+                }
+            });
+
+
+
             return true;
         }
 
