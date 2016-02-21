@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -29,6 +30,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,6 +73,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private static final String PREFS_NAME = "Preferences";
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -82,6 +85,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         Firebase.setAndroidContext(this);
         Firebase myFirebaseRef = new Firebase("https://todorpg.firebaseio.com/");
 
@@ -90,6 +94,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        CheckBox rememberMe = (CheckBox) findViewById(R.id.autoLoginBox);
+        if(settings.getBoolean("rememberMe",false))
+        {
+
+            mEmailView.setText(settings.getString("username",""));
+            mPasswordView.setText(settings.getString("password", ""));
+            rememberMe.setChecked(true);
+        }
+
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -108,6 +122,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 attemptLogin();
             }
         });
+
+
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
@@ -211,6 +227,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
+
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
         }
@@ -391,15 +408,43 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
                 @Override
-                public void onAuthenticated(AuthData authData) {
-                    System.out.println("Logged in: User ID: " + authData.getUid() + ", Provider: " + authData.getProvider());
-                    //Create an account for the data passed only the User ID.
-                    Account account = new Account("user", "pass", authData.getUid(),0);
-                    //Pass the account to the start of the task activity via intent.
-                    Intent i = new Intent(getApplicationContext(), TaskPage.class);
-                    i.putExtra("Account", account);
-                    finish();
-                    startActivity(i);
+                public void onAuthenticated(final AuthData authData) {
+                    CheckBox rememberMe = (CheckBox) findViewById(R.id.autoLoginBox);
+                   //Save in Preferences if remember me is checked.
+                    if(rememberMe.isChecked())
+                    {
+                        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                        SharedPreferences.Editor editor = settings.edit();
+                        editor.putBoolean("rememberMe",true);
+                        editor.putString("username", mEmail);
+                        editor.putString("password",mPassword);
+                        editor.commit();
+                    }
+                    else
+                    {
+                        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                        SharedPreferences.Editor editor = settings.edit();
+                        editor.putBoolean("rememberMe",false);
+                        editor.commit();
+                    }
+                    myFirebaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot snapshot) {
+                            long numTasks = (long) snapshot.child("Users").child(authData.getUid()).child("numTasks").getValue();
+                            //Create an account for the data passed only the User ID.
+                            Account account = new Account("user", "pass", authData.getUid(), 0, (int) numTasks);
+                            //Pass the account to the start of the task activity via intent.
+                            Intent i = new Intent(getApplicationContext(), TaskPage.class);
+                            i.putExtra("Account", account);
+                            finish();
+                            startActivity(i);
+                        }
+
+                        @Override
+                        public void onCancelled(FirebaseError firebaseError) {
+                        }
+                    });
+
                 }
 
                 @Override
@@ -416,11 +461,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             myFirebaseRef.createUser(mEmail, mPassword, new Firebase.ValueResultHandler<Map<String, Object>>() {
                 @Override
                 public void onSuccess(Map<String, Object> result) {
-                    Account account = new Account(mEmail, mPassword, (String) result.get("uid"), 1);
-                    //Store Account data for success.
+                    Account account = new Account(mEmail, mPassword, (String) result.get("uid"), 1, 0);
+                    //Store Account data on success.
                     Firebase ref = new Firebase("https://todorpg.firebaseio.com/Users").child(account.getUserID());
+                    //Write basic user Data to database.
                     ref.child("email").setValue(account.getUsername());
                     ref.child("Password").setValue(account.getPassword());
+                    ref.child("numTasks").setValue(account.getNumTasks());
                     Toast.makeText(LoginActivity.this, "New User",
                             Toast.LENGTH_LONG).show();
                     //Start Task page activity.

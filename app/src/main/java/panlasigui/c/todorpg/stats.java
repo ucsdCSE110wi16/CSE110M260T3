@@ -7,14 +7,12 @@ import android.os.Bundle;
 import android.app.Application;
 import android.os.Bundle;
 import android.provider.Settings;
->>>>>>> 1fa464ab6035b0110961c9e28313613df662e7c7
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class stats extends AppCompatActivity {
 
 
 public class stats extends AppCompatActivity {
@@ -41,7 +39,7 @@ public class stats extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-}
+
     public static statNode getIntel() {
         return intel;
     }

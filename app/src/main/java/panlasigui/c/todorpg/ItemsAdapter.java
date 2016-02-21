@@ -19,6 +19,11 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
 import java.util.ArrayList;
 import static android.widget.ProgressBar.*;
 
@@ -84,7 +89,7 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
         taskBackground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(callback != null) {
+                if (callback != null) {
                     Bundle b = new Bundle();
                     b.putString("tN", taskName.getText().toString());
                     b.putString("tD", taskDescription.getText().toString());
@@ -97,6 +102,57 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
         });
 
         return convertView;
+    }
+
+    @Override
+    public void add(TaskData object) {
+
+        String countStr = String.valueOf(this.getCount()+1);
+        super.add(object);
+        //Add to DB
+
+        Firebase ref = new Firebase("https://todorpg.firebaseio.com/Users/"+TaskPage.userID);
+        ref.child("numTasks").setValue(this.getCount());
+        ref.child("Task " + countStr);
+        ref = new Firebase("https://todorpg.firebaseio.com/Users/"+TaskPage.userID+"/Tasks/Task "+countStr);
+        ref.child("name").setValue(object.getName());
+        ref.child("description").setValue(object.getDescription());
+        ref.child("category").setValue(object.getCategory());
+        ref.child("difficulty").setValue(object.getDifficulty());
+
+    }
+
+    @Override
+    public void remove(TaskData object) {
+        int remove = this.getPosition(object);//0 index remove spot.
+
+        //Remove from  DB
+
+        Firebase ref = new Firebase("https://todorpg.firebaseio.com/Users/"+TaskPage.userID+"/Tasks");
+
+        //Renumber and rename
+        for (int i = 0; i<this.getCount();i++)
+        {
+            String str = String.valueOf(i);
+            String strMinus = String.valueOf(i-1);
+            TaskData task = new TaskData();
+            if(i>remove) {
+                //Copy
+                task = this.getItem(i);
+                ref.child("Task "+str).child("name").setValue(task.getName());
+                ref.child("Task "+str).child("description").setValue(task.getDescription());
+                ref.child("Task "+str).child("category").setValue(task.getCategory());
+                ref.child("Task "+str).child("difficulty").setValue(task.getDifficulty());
+            }
+        }
+
+
+        ref = new Firebase("https://todorpg.firebaseio.com/Users/"+TaskPage.userID);
+        String last = String.valueOf(this.getCount());
+        ref.child("Tasks").child("Task " +last).setValue(null);
+        super.remove(object);
+        ref.child("Tasks");
+        ref.child("numTasks").setValue(this.getCount());
     }
 
     private void confirmRemove(Context c, final int pos, String s) {

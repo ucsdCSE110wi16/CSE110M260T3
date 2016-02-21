@@ -28,6 +28,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -43,6 +47,7 @@ public class TaskPage extends AppCompatActivity implements
     public static ArrayList<TaskData> taskList;
     public static ItemsAdapter<TaskData> itemsAdapter;
     public static String userID;
+    private static Account account;
     ListView lvItems;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -55,12 +60,13 @@ public class TaskPage extends AppCompatActivity implements
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_page);
+        Firebase.setAndroidContext(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //setupListViewListener();
 
         Intent i =getIntent();
-        Account account = (Account) i.getParcelableExtra("Account");
+        account = (Account) i.getParcelableExtra("Account");
 
         userID = account.getUserID();
         System.out.println(userID);
@@ -91,10 +97,38 @@ public class TaskPage extends AppCompatActivity implements
         lvItems.setDividerHeight(50);
 
         taskList = new ArrayList<>();
+        //If returning user read DB for info.
+
+
         itemsAdapter = new ItemsAdapter<>(this, taskList);
         itemsAdapter.setCallback(this);
         lvItems.setAdapter(itemsAdapter);
 
+        if( account.isNew() == 0) {
+            Firebase ref = new Firebase("https://todorpg.firebaseio.com/Users/" + TaskPage.userID+"/Tasks");
+            ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    int numTasks = TaskPage.account.getNumTasks();
+                    for(int i = 0; i<numTasks; i++)
+                    {
+                        TaskData task = new TaskData();
+                        String strTask = String.valueOf(i+1);
+                        task.setName((String) snapshot.child("Task " + strTask).child("name").getValue());
+                        task.setDescription((String) snapshot.child("Task " + strTask).child("description").getValue());
+                        task.setCategory((String) snapshot.child("Task " + strTask).child("category").getValue());
+                        double diff = (double) snapshot.child("Task " + strTask).child("difficulty").getValue();
+                        task.setDifficulty((float) diff) ;
+                        TaskPage.taskList.add(task);
+                    }
+
+                }
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+                }
+            });
+        }
+        itemsAdapter.notifyDataSetChanged();
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -126,7 +160,7 @@ public class TaskPage extends AppCompatActivity implements
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+
         if (id == R.id.action_sortByName) {
             Collections.sort(taskList, TaskData.compTaskName);
             itemsAdapter.notifyDataSetChanged();
@@ -160,9 +194,7 @@ public class TaskPage extends AppCompatActivity implements
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+        public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 

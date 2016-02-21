@@ -23,6 +23,8 @@ import android.view.LayoutInflater;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+
 /**
  * Wow what a cool program
  */
@@ -112,6 +114,13 @@ public class FormDialog extends DialogFragment {
                                 TaskPage.itemsAdapter.add(task); //array is in TaskPage?
                             } else {
                                 TaskPage.taskList.set(pos, task);
+                                //Edit DB
+                                String posDBstr = String.valueOf(pos +1);
+                                Firebase ref = new Firebase("https://todorpg.firebaseio.com/Users/"+TaskPage.userID+"/Tasks/Task "+posDBstr);
+                                ref.child("name").setValue(task.getName());
+                                ref.child("description").setValue(task.getDescription());
+                                ref.child("category").setValue(task.getCategory());
+                                ref.child("difficulty").setValue(task.getDifficulty());
                                 TaskPage.itemsAdapter.notifyDataSetChanged();
                             }
                             d.dismiss();

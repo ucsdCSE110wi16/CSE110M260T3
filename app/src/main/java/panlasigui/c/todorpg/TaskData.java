@@ -33,6 +33,10 @@ public class TaskData {
         this.category = category;
 
     }
+    public TaskData()
+    {
+
+    }
     public String getName() {
         return name;
     }

@@ -11,13 +11,14 @@ import java.util.List;
  */
 public class Account implements Parcelable{
 
-    public Account(String user, String pass, String ID, int isNew)
+    public Account(String user, String pass, String ID, int isNew, int numTasks)
    {
        this.setUsername(user);
        this.setPassword(pass);
        this.setUserID(ID);
        this.isNew = isNew;
        taskList = new ArrayList<>();
+       this.numTasks = numTasks;
    }
     /* Fields relevant to an account */
     private static String username;
@@ -25,6 +26,15 @@ public class Account implements Parcelable{
     private static String userID;
     private ArrayList<TaskData> taskList;
     private int isNew;
+    private int numTasks;
+
+    public int getNumTasks() {
+        return numTasks;
+    }
+
+    public void setNumTasks(int numTasks) {
+        this.numTasks = numTasks;
+    }
 
     //Getters and Setters
     public int isNew() {
@@ -77,6 +87,7 @@ public class Account implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
        dest.writeString(this.getUserID());
         dest.writeInt(this.isNew());
+        dest.writeInt(this.numTasks);
 
     }
 
@@ -84,6 +95,7 @@ public class Account implements Parcelable{
     {
         this.setUserID(in.readString());
         this.setIsNew(in.readInt());
+        this.setNumTasks(in.readInt());
     }
     public static final Parcelable.Creator<Account> CREATOR = new Parcelable.Creator<Account>() {
         public Account createFromParcel(Parcel source) {
