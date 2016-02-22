@@ -1,4 +1,4 @@
-package panlasigui.c.todorpg;
+package panlasigui.c.todorpg.Activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -6,6 +6,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+
+import panlasigui.c.todorpg.R;
 
 public class Store extends AppCompatActivity {
 

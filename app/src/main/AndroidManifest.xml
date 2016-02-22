@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activities.LoginActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">"
@@ -26,40 +26,40 @@
         </intent-filter>
         </activity>
         <activity
-            android:name=".TaskPage"
+            android:name=".Activities.TaskPage"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:parentActivityName=".LoginActivity"
+            android:parentActivityName=".Activities.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="panlasigui.c.todorpg.LoginActivity" />
+                android:value=".Activities.LoginActivity" />
         </activity>
         <activity
-            android:name=".Profile"
+            android:name=".Activities.Profile"
             android:label="@string/title_activity_profile"
-            android:parentActivityName=".TaskPage"
+            android:parentActivityName=".Activities.TaskPage"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="panlasigui.c.todorpg.TaskPage" />
+                android:value=".Activities.TaskPage" />
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name=".Activities.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".TaskPage">
+            android:parentActivityName=".Activities.TaskPage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="panlasigui.c.todorpg.TaskPage" />
+                android:value=".Activities.TaskPage" />
         </activity>
         <activity
             android:name=".Skills"
             android:label="@string/title_activity_stats"
-            android:parentActivityName=".TaskPage"
+            android:parentActivityName=".Activities.TaskPage"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="panlasigui.c.todorpg.TaskPage" />
+                android:value=".Activities.TaskPage" />
         </activity>
         <!--
              ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -70,13 +70,13 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".Store"
+            android:name=".Activities.Store"
             android:label="@string/title_activity_store"
-            android:parentActivityName=".TaskPage"
+            android:parentActivityName=".Activities.TaskPage"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="panlasigui.c.todorpg.TaskPage" />
+                android:value=".Activities.TaskPage" />
         </activity>
     </application>
 

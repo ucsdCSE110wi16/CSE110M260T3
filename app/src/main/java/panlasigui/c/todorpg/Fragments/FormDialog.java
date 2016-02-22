@@ -1,29 +1,25 @@
-package panlasigui.c.todorpg;
+package panlasigui.c.todorpg.Fragments;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.Spinner;
-import android.view.LayoutInflater;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+
+import panlasigui.c.todorpg.Activities.TaskPage;
+import panlasigui.c.todorpg.Classes.TaskData;
+import panlasigui.c.todorpg.R;
 
 /**
  * Wow what a cool program

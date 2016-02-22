@@ -1,4 +1,4 @@
-package panlasigui.c.todorpg;
+package panlasigui.c.todorpg.Classes;
 
 public class statNode{
     public String stat;

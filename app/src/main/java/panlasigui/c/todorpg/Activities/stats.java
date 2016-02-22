@@ -1,18 +1,17 @@
-package panlasigui.c.todorpg;
+package panlasigui.c.todorpg.Activities;
 
 import android.os.Bundle;
 /**
  * created by Evan on 2/12/16
  */
-import android.app.Application;
-import android.os.Bundle;
-import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import panlasigui.c.todorpg.Classes.statNode;
+import panlasigui.c.todorpg.R;
 
 
 public class stats extends AppCompatActivity {

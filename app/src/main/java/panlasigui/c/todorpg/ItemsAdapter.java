@@ -1,31 +1,25 @@
 package panlasigui.c.todorpg;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.media.Rating;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
-import static android.widget.ProgressBar.*;
+
+import panlasigui.c.todorpg.Activities.TaskPage;
+import panlasigui.c.todorpg.Activities.stats;
+import panlasigui.c.todorpg.Classes.TaskData;
 
 /**
  * Created by Cameron on 2/6/2016.
@@ -111,7 +105,7 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
         super.add(object);
         //Add to DB
 
-        Firebase ref = new Firebase("https://todorpg.firebaseio.com/Users/"+TaskPage.userID);
+        Firebase ref = new Firebase("https://todorpg.firebaseio.com/Users/"+ TaskPage.userID);
         ref.child("numTasks").setValue(this.getCount());
         ref.child("Task " + countStr);
         ref = new Firebase("https://todorpg.firebaseio.com/Users/"+TaskPage.userID+"/Tasks/Task "+countStr);

@@ -1,10 +1,9 @@
-package panlasigui.c.todorpg;
+package panlasigui.c.todorpg.Classes;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by vishu on 2/12/2016.

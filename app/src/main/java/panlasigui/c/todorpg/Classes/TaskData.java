@@ -1,4 +1,4 @@
-package panlasigui.c.todorpg;
+package panlasigui.c.todorpg.Classes;
 
 /**
  * Created by Cameron on 2/5/2016.

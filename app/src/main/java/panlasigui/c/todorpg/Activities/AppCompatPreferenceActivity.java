@@ -1,4 +1,4 @@
-package panlasigui.c.todorpg;
+package panlasigui.c.todorpg.Activities;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
