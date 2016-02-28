@@ -90,59 +90,34 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:id="@+id/difficultyBar" />
-    <!--
-    <RelativeLayout
+
+
+
+    <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="1">
 
-        style="?android:buttonBarStyle">
-        <View
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/editDate"
+            android:layout_gravity="left"
+            android:layout_weight=".5"/>
+
+        <EditText
             android:layout_width="match_parent"
-            android:layout_height="1dip"
-            android:layout_marginLeft="4dip"
-            android:layout_marginRight="4dip"
-            android:background="?android:attr/dividerVertical"
-            android:layout_alignParentTop="true"/>
-
-        <View
-            android:id="@+id/button_view"
-            android:layout_width="1dip"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dip"
-            android:layout_marginTop="4dip"
-            android:background="?android:attr/dividerVertical"
-            android:layout_centerHorizontal="true"
-            />
+            android:inputType="time"
+            android:ems="10"
+            android:id="@+id/editTime"
+            android:layout_gravity="right"
+            android:layout_weight=".5"/>
+    </LinearLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:id="@+id/buttonCancelTask"
-            android:onClick="onClickFail"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_toStartOf="@id/button_view"
-            android:layout_toLeftOf="@id/button_view"
-            android:background="?android:attr/selectableItemBackground"
-            android:text="@android:string/cancel"
 
-            android:layout_alignParentBottom="true"/>
-
-        <Button
-            android:id="@+id/buttonCreateTask"
-            android:onClick="onCreateTask"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:background="?android:attr/selectableItemBackground"
-            android:text="@string/create_button"
-            android:layout_alignParentBottom="true"
-            android:layout_toEndOf="@id/button_view"
-            android:layout_toRightOf="@id/button_view"/>
-    </RelativeLayout>
-    -->
 </LinearLayout>

@@ -35,11 +35,15 @@ public class FormDialog extends DialogFragment {
     private ArrayAdapter<CharSequence> adapter;
     private boolean edit = false;
     private int pos;
+    //private EditText date;
+    //private EditText time;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
+        //date = (EditText) getView().findViewById(R.id.editDate);
+        //time = (EditText) getView().findViewById(R.id.editTime);
 
         View view = inflater.inflate(R.layout.form, null);
 
@@ -57,6 +61,12 @@ public class FormDialog extends DialogFragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         categorySpinner.setAdapter(adapter);
+
+        /*
+        date.setOnClickListener(this);
+        time.setOnClickListener(this);
+        */
+
 
         //edit tasks
         Bundle b = getArguments();

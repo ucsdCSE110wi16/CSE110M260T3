@@ -3,12 +3,14 @@ package panlasigui.c.todorpg;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -74,11 +76,29 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
         final TextView taskDescription = (TextView) convertView.findViewById(R.id.taskInstanceDesc);
         final TextView taskCategory = (TextView) convertView.findViewById(R.id.taskInstanceCategory);
         final RatingBar taskDifficulty = (RatingBar) convertView.findViewById(R.id.taskInstanceDiff);
+        final ImageView categoryImage = (ImageView) convertView.findViewById(R.id.categoryIcon);
 
         taskName.setText(task.getName());
         taskDescription.setText(task.getDescription());
         taskCategory.setText(task.getCategory());
         taskDifficulty.setRating(task.getDifficulty());
+
+
+        switch (taskCategory.getText().toString()) {
+            case "Health":
+                categoryImage.setImageResource(R.drawable.health);
+                break;
+            case "Fitness":
+                categoryImage.setImageResource(R.drawable.str);
+                break;
+            case "Intelligence":
+                categoryImage.setImageResource(R.drawable.magic);
+                break;
+            case "Charisma":
+                categoryImage.setImageResource(R.drawable.smile);
+                break;
+        }
+
 
         taskBackground.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +121,7 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
     @Override
     public void add(TaskData object) {
 
-        String countStr = String.valueOf(this.getCount()+1);
+        String countStr = String.valueOf(this.getCount() + 1);
         super.add(object);
         //Add to DB
 
@@ -173,7 +193,8 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
     }
 
     public interface ItemsAdapterCallback {
-        public void editTask(Bundle b);
+        void editTask(Bundle b);
     }
+
 
 }

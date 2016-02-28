@@ -1,7 +1,10 @@
 package panlasigui.c.todorpg.Activities;
 
+import android.app.DatePickerDialog;
 import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +18,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,8 +32,11 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Locale;
 
 import panlasigui.c.todorpg.Classes.Account;
 import panlasigui.c.todorpg.Classes.TaskData;
@@ -50,14 +59,47 @@ public class TaskPage extends AppCompatActivity implements
      */
     private GoogleApiClient client;
 
+    private EditText date;
+    private EditText time;
+    private DatePickerDialog datePicker;
+    private TimePickerDialog timePicker;
+
+    private SimpleDateFormat dateFormat;
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_page);
+        getWindow().getDecorView().setBackgroundColor(Color.WHITE);
         Firebase.setAndroidContext(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        /*
+        date = (EditText) findViewById(R.id.editDate);
+        time = (EditText) findViewById(R.id.editTime);
+        dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+
+
+        date.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+
+            }
+
+        });
+        time.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+            }
+
+        });
+        */
         //setupListViewListener();
 
         Intent i =getIntent();
@@ -76,6 +118,7 @@ public class TaskPage extends AppCompatActivity implements
         });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);

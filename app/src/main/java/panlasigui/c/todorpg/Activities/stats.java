@@ -55,7 +55,7 @@ public class stats extends AppCompatActivity {
         return charm;
     }
 
-    protected static void updateStat(String stat, float amount){
+    public static void updateStat(String stat, float amount){
         if(stat.equals("Intelligence")) {
             intel.setCurrExp(intel.getCurrExp() + (int) amount * 2);
             if (intel.getCurrExp() >= intel.getMaxExp()) {
