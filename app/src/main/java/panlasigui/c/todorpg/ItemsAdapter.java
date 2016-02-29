@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -77,6 +78,10 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
         final TextView taskCategory = (TextView) convertView.findViewById(R.id.taskInstanceCategory);
         final RatingBar taskDifficulty = (RatingBar) convertView.findViewById(R.id.taskInstanceDiff);
         final ImageView categoryImage = (ImageView) convertView.findViewById(R.id.categoryIcon);
+        final ProgressBar intel_exp = (ProgressBar) LayoutInflater.from(getContext()).inflate(R.layout.content_stats, parent, false).findViewById(R.id.progressBar);
+        System.out.println("the progress is " + intel_exp.getProgress());
+        intel_exp.setProgress(37);
+        System.out.println("the progress is after: " + intel_exp.getProgress());
 
         taskName.setText(task.getName());
         taskDescription.setText(task.getDescription());

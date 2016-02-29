@@ -1,5 +1,9 @@
 package panlasigui.c.todorpg.Classes;
 
+import android.widget.ProgressBar;
+
+import panlasigui.c.todorpg.R;
+
 public class statNode{
     public String stat;
     public int level;

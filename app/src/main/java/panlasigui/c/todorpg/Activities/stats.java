@@ -1,5 +1,6 @@
 package panlasigui.c.todorpg.Activities;
 
+import android.app.Activity;
 import android.os.Bundle;
 /**
  * created by Evan on 2/12/16
@@ -9,19 +10,28 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import java.util.logging.LogRecord;
 
 import panlasigui.c.todorpg.Classes.statNode;
 import panlasigui.c.todorpg.R;
+import android.os.Handler;
+
 
 
 public class stats extends AppCompatActivity {
 
-    protected static statNode intel = new statNode("intel", 0, 5, 0);
-    protected static statNode fit = new statNode ("fit", 0, 5, 0);
-    protected static statNode hp = new statNode ("hp", 0, 5, 0);
-    protected static statNode charm = new statNode ("charm", 0,5 ,0);
+    protected static statNode intel = new statNode("intel", 0, 6, 0);
+    protected static statNode fit = new statNode ("fit", 0, 6, 0);
+    protected static statNode hp = new statNode ("hp", 0, 6, 0);
+    protected static statNode charm = new statNode ("charm", 0, 6, 0);
+    public statsActivity intProg = new statsActivity();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -51,11 +61,14 @@ public class stats extends AppCompatActivity {
         return hp;
     }
 
-    public static statNode getCharm() {
-        return charm;
-    }
+    public static statNode getCharm() {return charm; }
+
+    public ProgressBar intel_exp = (ProgressBar) findViewById(R.id.progressBar);
+
+
 
     public static void updateStat(String stat, float amount){
+
         if(stat.equals("Intelligence")) {
             intel.setCurrExp(intel.getCurrExp() + (int) amount * 2);
             if (intel.getCurrExp() >= intel.getMaxExp()) {
