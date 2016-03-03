@@ -414,7 +414,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     {
                         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
                         SharedPreferences.Editor editor = settings.edit();
-                        editor.putBoolean("rememberMe",true);
+                        editor.putBoolean("rememberMe", true);
                         editor.putString("username", mEmail);
                         editor.putString("password",mPassword);
                         editor.commit();
@@ -432,7 +432,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             long numTasks = (long) snapshot.child("Users").child(authData.getUid()).child("numTasks").getValue();
                             //Create an account for the data passed only the User ID.
                             Account account = new Account("user", "pass", authData.getUid(), 0, (int) numTasks);
+
                             //Pass the account to the start of the task activity via intent.
+                            int intelligenceXP = (int) snapshot.child("Users").child(authData.getUid()).child("intelligenceXP").getValue();
+                            int healthXP = (int) snapshot.child("Users").child(authData.getUid()).child("healthXP").getValue();
+                            int fitnessXP = (int) snapshot.child("Users").child(authData.getUid()).child("fitnessXP").getValue();
+                            int charismaXP = (int) snapshot.child("Users").child(authData.getUid()).child("charismaXP").getValue();
+                            account.setHealthXP(healthXP);
+                            account.setCharismaXP(charismaXP);
+                            account.setFitnessXP(fitnessXP);
+                            account.setIntelligenceXP(intelligenceXP);
+
                             Intent i = new Intent(getApplicationContext(), TaskPage.class);
                             i.putExtra("Account", account);
                             finish();
@@ -461,12 +471,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 @Override
                 public void onSuccess(Map<String, Object> result) {
                     Account account = new Account(mEmail, mPassword, (String) result.get("uid"), 1, 0);
+                    account.setFitnessXP(0);account.setIntelligenceXP(0);account.setHealthXP(0);account.setCharismaXP(0);
                     //Store Account data on success.
+
                     Firebase ref = new Firebase("https://todorpg.firebaseio.com/Users").child(account.getUserID());
                     //Write basic user Data to database.
                     ref.child("email").setValue(account.getUsername());
                     ref.child("Password").setValue(account.getPassword());
                     ref.child("numTasks").setValue(account.getNumTasks());
+                    ref.child("fitnessXP").setValue(account.getFitnessXP());
+                    ref.child("charismaXP").setValue(account.getCharismaXP());
+                    ref.child("intelligenceXP").setValue(account.getIntelligenceXP());
+                    ref.child("fitnessXP").setValue(account.getFitnessXP());
+
                     Toast.makeText(LoginActivity.this, "New User",
                             Toast.LENGTH_LONG).show();
                     //Start Task page activity.

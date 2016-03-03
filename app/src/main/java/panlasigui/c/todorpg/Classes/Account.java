@@ -26,6 +26,45 @@ public class Account implements Parcelable{
     private ArrayList<TaskData> taskList;
     private int isNew;
     private int numTasks;
+    private int charismaXP;
+    private int  intelligenceXP;
+    private int  fitnessXP;
+    private int healthXP;
+
+    public int getHealthXP() {
+        return healthXP;
+    }
+
+    public void setHealthXP(int healthXP) {
+        this.healthXP = healthXP;
+    }
+
+    public int getIntelligenceXP() {
+        return intelligenceXP;
+    }
+
+    public void setIntelligenceXP(int intelligenceXP) {
+        this.intelligenceXP = intelligenceXP;
+    }
+
+    public int getFitnessXP() {
+        return fitnessXP;
+    }
+
+    public void setFitnessXP(int fitnessXP) {
+        this.fitnessXP = fitnessXP;
+    }
+
+    public int getCharismaXP() {
+
+        return charismaXP;
+    }
+
+    public void setCharismaXP(int charismaXP) {
+        this.charismaXP = charismaXP;
+    }
+
+
 
     public int getNumTasks() {
         return numTasks;
@@ -87,6 +126,10 @@ public class Account implements Parcelable{
        dest.writeString(this.getUserID());
         dest.writeInt(this.isNew());
         dest.writeInt(this.numTasks);
+        dest.writeInt(this.getCharismaXP());
+        dest.writeInt(this.getFitnessXP());
+        dest.writeInt(this.getHealthXP());
+        dest.writeInt(this.getIntelligenceXP());
 
     }
 
@@ -95,6 +138,10 @@ public class Account implements Parcelable{
         this.setUserID(in.readString());
         this.setIsNew(in.readInt());
         this.setNumTasks(in.readInt());
+        this.setCharismaXP(in.readInt());
+        this.setFitnessXP(in.readInt());
+        this.setHealthXP(in.readInt());
+        this.setIntelligenceXP(in.readInt());
     }
     public static final Parcelable.Creator<Account> CREATOR = new Parcelable.Creator<Account>() {
         public Account createFromParcel(Parcel source) {

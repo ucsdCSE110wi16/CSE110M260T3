@@ -75,6 +75,9 @@ public class stats extends AppCompatActivity {
                 intel.setCurrExp(intel.getCurrExp() - intel.getMaxExp());
                 intel.setLevel(intel.getLevel() + 1);
             }
+           //TaskPage.account.setIntelligenceXP(0);
+           //Calculate total and update account in TaskPage
+            //Update Firebase
         }
         else if(stat.equals("Fitness")) {
             fit.setCurrExp(fit.getCurrExp() + (int) amount * 2);
