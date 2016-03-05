@@ -434,14 +434,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             Account account = new Account("user", "pass", authData.getUid(), 0, (int) numTasks);
 
                             //Pass the account to the start of the task activity via intent.
-                            int intelligenceXP = (int) snapshot.child("Users").child(authData.getUid()).child("intelligenceXP").getValue();
-                            int healthXP = (int) snapshot.child("Users").child(authData.getUid()).child("healthXP").getValue();
-                            int fitnessXP = (int) snapshot.child("Users").child(authData.getUid()).child("fitnessXP").getValue();
-                            int charismaXP = (int) snapshot.child("Users").child(authData.getUid()).child("charismaXP").getValue();
-                            account.setHealthXP(healthXP);
-                            account.setCharismaXP(charismaXP);
-                            account.setFitnessXP(fitnessXP);
-                            account.setIntelligenceXP(intelligenceXP);
+                            System.out.println(snapshot.child("Users").child(authData.getUid()).child("intelligenceXP").getValue());
+                            long intelligenceXP = (long) snapshot.child("Users").child(authData.getUid()).child("intelligenceXP").getValue();
+                            long healthXP = (long) snapshot.child("Users").child(authData.getUid()).child("healthXP").getValue();
+                            long fitnessXP = (long) snapshot.child("Users").child(authData.getUid()).child("fitnessXP").getValue();
+                            long charismaXP = (long) snapshot.child("Users").child(authData.getUid()).child("charismaXP").getValue();
+                            account.setCharismaXP(Integer.parseInt(Long.toString(charismaXP)));
+                            account.setHealthXP(Integer.parseInt(Long.toString(healthXP)));
+                            account.setFitnessXP(Integer.parseInt(Long.toString(fitnessXP)));
+                            account.setIntelligenceXP(Integer.parseInt(Long.toString(intelligenceXP)));
 
                             Intent i = new Intent(getApplicationContext(), TaskPage.class);
                             i.putExtra("Account", account);
@@ -482,7 +483,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     ref.child("fitnessXP").setValue(account.getFitnessXP());
                     ref.child("charismaXP").setValue(account.getCharismaXP());
                     ref.child("intelligenceXP").setValue(account.getIntelligenceXP());
-                    ref.child("fitnessXP").setValue(account.getFitnessXP());
+                    ref.child("healthXP").setValue(account.getHealthXP());
 
                     Toast.makeText(LoginActivity.this, "New User",
                             Toast.LENGTH_LONG).show();

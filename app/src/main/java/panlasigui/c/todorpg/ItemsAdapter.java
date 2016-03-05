@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.os.Handler;
 
 import com.firebase.client.Firebase;
 
@@ -78,10 +79,14 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
         final TextView taskCategory = (TextView) convertView.findViewById(R.id.taskInstanceCategory);
         final RatingBar taskDifficulty = (RatingBar) convertView.findViewById(R.id.taskInstanceDiff);
         final ImageView categoryImage = (ImageView) convertView.findViewById(R.id.categoryIcon);
-        final ProgressBar intel_exp = (ProgressBar) LayoutInflater.from(getContext()).inflate(R.layout.content_stats, parent, false).findViewById(R.id.progressBar);
-        System.out.println("the progress is " + intel_exp.getProgress());
-        intel_exp.setProgress(37);
-        System.out.println("the progress is after: " + intel_exp.getProgress());
+        //final TextView intel_exp = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.content_stats, parent, false).findViewById(R.id.a1);
+        ProgressBar intel_exp = (ProgressBar) LayoutInflater.from(getContext()).inflate(R.layout.content_stats, parent, false).findViewById(R.id.progressBar);
+        System.out.println("the progress is " + ((TaskPage.account.getIntelligenceXP() % 15) * 100) / 15);
+        intel_exp.setMax(70);
+        intel_exp.setProgress(70);
+        //((TaskPage.account.getIntelligenceXP() % 10) * 100) / 10)
+        //intel_exp.setVisibility(View.GONE);
+        System.out.println("the progress is after: " + ((TaskPage.account.getIntelligenceXP() % 15) * 100) / 15);
 
         taskName.setText(task.getName());
         taskDescription.setText(task.getDescription());

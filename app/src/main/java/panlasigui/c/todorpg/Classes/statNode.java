@@ -9,7 +9,7 @@ public class statNode{
     public int level;
     public int currExp;
     public int maxExp;
-    public int totatlXP;
+    public int totalXP;
 
     public statNode(String stat, int level, int maxExp, int currExp) {
         this.stat = stat;

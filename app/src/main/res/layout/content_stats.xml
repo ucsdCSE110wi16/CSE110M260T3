@@ -64,13 +64,26 @@
         android:layout_height="wrap_content"
         android:id="@+id/progressBar"
         android:background="#0474ac"
-        android:textAlignment="center"
+        android:clickable="false"
         android:progressBackgroundTint="#370404"
+        android:progressTint="#51fae9"
+        android:layout_above="@+id/textView2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+<!--
+    <TextView
+        android:id="@+id/a1"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="16sp"
+        android:gravity="center_horizontal"
         android:layout_above="@+id/textView2"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:progressTint="#78f2f0" />
-
+        android:background="#0474ac" />
+    -->
     <!-- intelligence text-->
     <TextView
         android:layout_width="wrap_content"
