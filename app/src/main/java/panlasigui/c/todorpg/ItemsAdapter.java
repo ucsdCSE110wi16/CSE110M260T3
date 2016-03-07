@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -80,13 +81,15 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
         final TextView taskCategory = (TextView) convertView.findViewById(R.id.taskInstanceCategory);
         final RatingBar taskDifficulty = (RatingBar) convertView.findViewById(R.id.taskInstanceDiff);
         final ImageView categoryImage = (ImageView) convertView.findViewById(R.id.categoryIcon);
-        //final TextView intel_exp = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.content_stats, parent, false).findViewById(R.id.a1);
-
+        final EditText date = (EditText) convertView.findViewById(R.id.editDate);
+        final EditText time = (EditText) convertView.findViewById(R.id.editTime);
 
         taskName.setText(task.getName());
         taskDescription.setText(task.getDescription());
         taskCategory.setText(task.getCategory());
         taskDifficulty.setRating(task.getDifficulty());
+        date.setText(task.getDate());
+        time.setText(task.getTime());
 
         switch (taskCategory.getText().toString()) {
             case "Health":
@@ -117,6 +120,8 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
                     b.putString("tD", taskDescription.getText().toString());
                     b.putString("tC", taskCategory.getText().toString());
                     b.putFloat("diff", taskDifficulty.getRating());
+                    b.putString("date", date.getText().toString());
+                    b.putString("time", time.getText().toString());
                     b.putInt("pos", position);
                     callback.editTask(b);
                 }
