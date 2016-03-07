@@ -23,6 +23,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
@@ -32,6 +33,8 @@ import com.firebase.client.ValueEventListener;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,7 +47,7 @@ import panlasigui.c.todorpg.Classes.TaskData;
 import panlasigui.c.todorpg.Fragments.FormDialog;
 import panlasigui.c.todorpg.ItemsAdapter;
 import panlasigui.c.todorpg.R;
-import panlasigui.c.todorpg.Skills;
+
 
 public class TaskPage extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener, ItemsAdapter.ItemsAdapterCallback {
@@ -64,8 +67,12 @@ public class TaskPage extends AppCompatActivity implements
     private EditText time;
     private DatePickerDialog datePicker;
     private TimePickerDialog timePicker;
-
     private SimpleDateFormat dateFormat;
+
+    private TextView avInt;
+    private TextView avFit;
+    private TextView avHea;
+    private TextView avCha;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -103,7 +110,7 @@ public class TaskPage extends AppCompatActivity implements
         //setupListViewListener();
 
         Intent i =getIntent();
-        account = (Account) i.getParcelableExtra("Account");
+        account =  i.getParcelableExtra("Account");
 
         userID = account.getUserID();
 
@@ -159,6 +166,19 @@ public class TaskPage extends AppCompatActivity implements
                         task.setDifficulty((float) diff) ;
                         TaskPage.taskList.add(task);
                     }
+
+                    avInt = (TextView) findViewById(R.id.avatarInt);
+                    avFit = (TextView) findViewById(R.id.avatarFit);
+                    avHea = (TextView) findViewById(R.id.avatarHea);
+                    avCha = (TextView) findViewById(R.id.avatarCha);
+
+                    if (avInt != null && avFit != null && avHea != null && avCha != null) {
+                        avInt.setText("Intelligence Level " + account.getIntelligenceXP() / 15);
+                        avFit.setText("Fitness Level " + account.getFitnessXP() / 15);
+                        avHea.setText("Health Level " + account.getHealthXP() / 15);
+                        avCha.setText("Charisma Level " + account.getCharismaXP() / 15);
+                    }
+
 
                 }
                 @Override
@@ -237,21 +257,18 @@ public class TaskPage extends AppCompatActivity implements
     }
 
         public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+            // Handle navigation view item clicks here.
+            int id = item.getItemId();
 
-        if (id == R.id.nav_inventory) {
-            // Handle the camera action
-        } else if (id == R.id.nav_profile) {
-            startActivity(new Intent(TaskPage.this, Profile.class));
-        } else if (id == R.id.nav_store) {
-            startActivity(new Intent(TaskPage.this, Store.class));
-        } else if (id == R.id.nav_stats) {
-            startActivity(new Intent(TaskPage.this, Skills.class));
-        }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+           if (id == R.id.nav_stats) {
+                startActivity(new Intent(TaskPage.this, stats.class));
+            }
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+            drawer.clearFocus();
+            drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 

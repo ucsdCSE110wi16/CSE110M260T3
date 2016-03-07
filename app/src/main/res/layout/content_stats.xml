@@ -57,7 +57,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignBottom="@+id/progressBar" />
 
-    <!-- intelligence Bar-->
+    <!-- intelligence Bar -->
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="@dimen/design_tab_max_width"
@@ -67,11 +67,14 @@
         android:clickable="false"
         android:progressBackgroundTint="#370404"
         android:progressTint="#51fae9"
-        android:layout_above="@+id/textView2"
+        android:layout_above="@+id/fitLabel"
         android:layout_alignParentRight="true"
+        android:indeterminate="false"
+        android:max="100"
         android:layout_alignParentEnd="true"/>
 
-<!--
+    <!--
+
     <TextView
         android:id="@+id/a1"
         android:layout_width="20dp"
@@ -80,17 +83,19 @@
         android:textSize="16sp"
         android:gravity="center_horizontal"
         android:layout_above="@+id/textView2"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentEnd="false"
         android:background="#0474ac" />
     -->
+
+
     <!-- intelligence text-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Intelligence:"
+        android:text="Intelligence:     "
         android:textSize="22dp"
-        android:id="@+id/textView"
+        android:id="@+id/intLabel"
         android:layout_above="@+id/progressBar"
         android:layout_centerHorizontal="true"/>
 
@@ -113,11 +118,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/progressBar2"
         android:background="#196003"
-        android:clickable="false"
-        android:progress="80"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
         android:progressBackgroundTint="#370404"
         android:progressTint="#5ff865"
-        android:layout_above="@+id/textView3"
+        android:layout_above="@+id/heaLabel"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"/>
 
@@ -125,9 +130,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fitness:"
+        android:text="Fitness:     "
         android:textSize="22dp"
-        android:id="@+id/textView2"
+        android:id="@+id/fitLabel"
         android:layout_above="@+id/progressBar2"
         android:layout_centerHorizontal="true"/>
 
@@ -150,10 +155,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/progressBar3"
         android:background="#820c06"
-        android:progress="60"
         android:progressBackgroundTint="#370404"
         android:progressTint="#f50b07"
-        android:layout_above="@+id/textView4"
+        android:layout_above="@+id/chaLabel"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -161,9 +165,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Health:"
+        android:text="Health:     "
         android:textSize="22dp"
-        android:id="@+id/textView3"
+        android:id="@+id/heaLabel"
         android:layout_above="@id/progressBar3"
         android:layout_centerHorizontal="true"/>
 
@@ -185,7 +189,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/progressBar4"
         android:background="#bb2fcc"
-        android:progress="20"
         android:progressBackgroundTint="#370404"
         android:progressTint="#cafe00dc"
         android:layout_alignParentBottom="true"
@@ -197,9 +200,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Charisma:"
+        android:text="Charisma:     "
         android:textSize="22dp"
-        android:id="@+id/textView4"
+        android:id="@+id/chaLabel"
         android:layout_above="@id/progressBar4"
         android:layout_centerHorizontal="true"/>
 </RelativeLayout>
