@@ -448,6 +448,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             i.putExtra("Account", account);
                             finish();
                             startActivity(i);
+                            finish();
                         }
 
                         @Override
@@ -464,6 +465,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     Intent intent = getIntent();
                     finish();
                     startActivity(intent);
+                    finish();
                 }
             });
 
@@ -492,15 +494,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     i.putExtra("Account", account);
                     finish();
                     startActivity(i);
+                    finish();
                 }
 
                 @Override
                 public void onError(FirebaseError firebaseError) {
-                    Toast.makeText(LoginActivity.this, "Could not make new User",
+                    Toast.makeText(LoginActivity.this, "Did not make new User",
                             Toast.LENGTH_LONG).show();
                     Intent intent = getIntent();
+
                     finish();
                     startActivity(intent);
+                    finish();
                 }
             });
 

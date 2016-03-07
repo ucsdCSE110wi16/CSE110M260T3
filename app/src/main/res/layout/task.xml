@@ -40,7 +40,8 @@
             android:textSize="20sp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            android:id="@+id/taskInstanceName"/>
+            android:id="@+id/taskInstanceName"
+            android:maxLength="20" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -49,7 +50,8 @@
             android:text="task_description"
             android:textSize="16sp"
             android:layout_margin="4dp"
-            android:id="@+id/taskInstanceDesc"/>
+            android:id="@+id/taskInstanceDesc"
+            android:maxLength="35" />
 
         <TextView
             android:layout_width="wrap_content"
