@@ -81,13 +81,7 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
         final RatingBar taskDifficulty = (RatingBar) convertView.findViewById(R.id.taskInstanceDiff);
         final ImageView categoryImage = (ImageView) convertView.findViewById(R.id.categoryIcon);
         //final TextView intel_exp = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.content_stats, parent, false).findViewById(R.id.a1);
-        ProgressBar intel_exp = (ProgressBar) LayoutInflater.from(getContext()).inflate(R.layout.content_stats, parent, false).findViewById(R.id.progressBar);
-        System.out.println("the progress is " + ((TaskPage.account.getIntelligenceXP() % 15) * 100) / 15);
-        intel_exp.setMax(70);
-        intel_exp.setProgress(70);
-        //((TaskPage.account.getIntelligenceXP() % 10) * 100) / 10)
-        //intel_exp.setVisibility(View.GONE);
-        System.out.println("the progress is after: " + ((TaskPage.account.getIntelligenceXP() % 15) * 100) / 15);
+
 
         taskName.setText(task.getName());
         taskDescription.setText(task.getDescription());
@@ -183,7 +177,7 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
         ref.child("numTasks").setValue(this.getCount());
     }
 
-    private void confirmRemove(Context c, final int pos, String s) {
+    private void confirmRemove(Context c, final int pos, final String s) {
         new AlertDialog.Builder(c)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("CONFIRM")
@@ -191,8 +185,9 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-                        stats.updateStat(getItem(pos).getCategory(), getItem(pos).getDifficulty());
+                        if (s.equalsIgnoreCase("complete")) {
+                            stats.updateStat(getItem(pos).getCategory(), getItem(pos).getDifficulty());
+                        }
                         remove(getItem(pos));
                         notifyDataSetChanged();
                     }

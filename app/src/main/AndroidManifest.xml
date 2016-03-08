@@ -36,15 +36,6 @@
                 android:value=".Activities.LoginActivity" />
         </activity>
         <activity
-            android:name=".Activities.Profile"
-            android:label="@string/title_activity_profile"
-            android:parentActivityName=".Activities.TaskPage"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activities.TaskPage" />
-        </activity>
-        <activity
             android:name=".Activities.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".Activities.TaskPage">
@@ -53,7 +44,7 @@
                 android:value=".Activities.TaskPage" />
         </activity>
         <activity
-            android:name=".Skills"
+            android:name=".Activities.stats"
             android:label="@string/title_activity_stats"
             android:parentActivityName=".Activities.TaskPage"
             android:theme="@style/AppTheme.NoActionBar">
@@ -69,15 +60,6 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity
-            android:name=".Activities.Store"
-            android:label="@string/title_activity_store"
-            android:parentActivityName=".Activities.TaskPage"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activities.TaskPage" />
-        </activity>
     </application>
 
 </manifest>

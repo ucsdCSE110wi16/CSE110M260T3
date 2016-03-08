@@ -73,14 +73,14 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_profile">Profile</string>
-    <string name="title_activity_stats">stats</string>
+    <string name="title_activity_stats">Stats</string>
     <string name="taskNameHint">Task Name</string>
     <string name="taskDescriptionHint">Description</string>
     <string name="createTask">Create Task</string>
     <string name="difficulty">Difficulty:</string>
     <string name="noTasksToShow">No Tasks to Show!</string>
-    <string name="avatarName">Ixenbay</string>
-    <string name="avatarStatus">wat</string>
+    <string name="avatarName">Get it done</string>
+    <string name="avatarStatus">Dont let your memes be dreams</string>
     <string name="navInventoryLabel">Inventory</string>
     <string name="navStatsLabel">Stats</string>
     <string name="navProfileLabel">Profile</string>
