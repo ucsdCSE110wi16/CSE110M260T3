@@ -414,7 +414,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     {
                         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
                         SharedPreferences.Editor editor = settings.edit();
-                        editor.putBoolean("rememberMe",true);
+                        editor.putBoolean("rememberMe", true);
                         editor.putString("username", mEmail);
                         editor.putString("password",mPassword);
                         editor.commit();
@@ -432,7 +432,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             long numTasks = (long) snapshot.child("Users").child(authData.getUid()).child("numTasks").getValue();
                             //Create an account for the data passed only the User ID.
                             Account account = new Account("user", "pass", authData.getUid(), 0, (int) numTasks);
+
                             //Pass the account to the start of the task activity via intent.
+                            System.out.println(snapshot.child("Users").child(authData.getUid()).child("intelligenceXP").getValue());
+                            long intelligenceXP = (long) snapshot.child("Users").child(authData.getUid()).child("intelligenceXP").getValue();
+                            long healthXP = (long) snapshot.child("Users").child(authData.getUid()).child("healthXP").getValue();
+                            long fitnessXP = (long) snapshot.child("Users").child(authData.getUid()).child("fitnessXP").getValue();
+                            long charismaXP = (long) snapshot.child("Users").child(authData.getUid()).child("charismaXP").getValue();
+                            account.setCharismaXP(Integer.parseInt(Long.toString(charismaXP)));
+                            account.setHealthXP(Integer.parseInt(Long.toString(healthXP)));
+                            account.setFitnessXP(Integer.parseInt(Long.toString(fitnessXP)));
+                            account.setIntelligenceXP(Integer.parseInt(Long.toString(intelligenceXP)));
+
                             Intent i = new Intent(getApplicationContext(), TaskPage.class);
                             i.putExtra("Account", account);
                             finish();
@@ -461,12 +472,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 @Override
                 public void onSuccess(Map<String, Object> result) {
                     Account account = new Account(mEmail, mPassword, (String) result.get("uid"), 1, 0);
+                    account.setFitnessXP(0);account.setIntelligenceXP(0);account.setHealthXP(0);account.setCharismaXP(0);
                     //Store Account data on success.
+
                     Firebase ref = new Firebase("https://todorpg.firebaseio.com/Users").child(account.getUserID());
                     //Write basic user Data to database.
                     ref.child("email").setValue(account.getUsername());
                     ref.child("Password").setValue(account.getPassword());
                     ref.child("numTasks").setValue(account.getNumTasks());
+                    ref.child("fitnessXP").setValue(account.getFitnessXP());
+                    ref.child("charismaXP").setValue(account.getCharismaXP());
+                    ref.child("intelligenceXP").setValue(account.getIntelligenceXP());
+                    ref.child("healthXP").setValue(account.getHealthXP());
+
                     Toast.makeText(LoginActivity.this, "New User",
                             Toast.LENGTH_LONG).show();
                     //Start Task page activity.

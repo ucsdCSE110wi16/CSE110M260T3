@@ -52,7 +52,7 @@ public class TaskPage extends AppCompatActivity implements
     public static ArrayList<TaskData> taskList;
     public static ItemsAdapter<TaskData> itemsAdapter;
     public static String userID;
-    private static Account account;
+    public static Account account;
     ListView lvItems;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -106,7 +106,7 @@ public class TaskPage extends AppCompatActivity implements
         account = (Account) i.getParcelableExtra("Account");
 
         userID = account.getUserID();
-        System.out.println(userID);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
