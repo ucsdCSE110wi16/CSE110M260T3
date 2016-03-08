@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.os.Handler;
 
@@ -93,19 +94,22 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
         taskCategory.setText(task.getCategory());
         taskDifficulty.setRating(task.getDifficulty());
 
-
         switch (taskCategory.getText().toString()) {
             case "Health":
                 categoryImage.setImageResource(R.drawable.health);
+                taskBackground.setBackgroundResource(R.drawable.health_background);
                 break;
             case "Fitness":
                 categoryImage.setImageResource(R.drawable.str);
+                taskBackground.setBackgroundResource(R.drawable.str_background);
                 break;
             case "Intelligence":
                 categoryImage.setImageResource(R.drawable.magic);
+                taskBackground.setBackgroundResource(R.drawable.magic_background);
                 break;
             case "Charisma":
                 categoryImage.setImageResource(R.drawable.smile);
+                taskBackground.setBackgroundResource(R.drawable.charisma_background);
                 break;
         }
 
@@ -159,7 +163,7 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
         {
             String str = String.valueOf(i);
             String strMinus = String.valueOf(i-1);
-            TaskData task = new TaskData();
+            TaskData task;
             if(i>remove) {
                 //Copy
                 task = this.getItem(i);
