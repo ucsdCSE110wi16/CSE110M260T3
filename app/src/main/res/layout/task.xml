@@ -30,7 +30,6 @@
         android:background="@drawable/task_background"
         android:id="@+id/taskBackground">
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

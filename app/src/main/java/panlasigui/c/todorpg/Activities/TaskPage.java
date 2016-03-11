@@ -57,17 +57,20 @@ public class TaskPage extends AppCompatActivity implements
     public static String userID;
     public static Account account;
     ListView lvItems;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
 
+    /*
     private EditText date;
     private EditText time;
     private DatePickerDialog datePicker;
     private TimePickerDialog timePicker;
     private SimpleDateFormat dateFormat;
+    */
 
     private TextView avInt;
     private TextView avFit;
@@ -88,32 +91,21 @@ public class TaskPage extends AppCompatActivity implements
         time = (EditText) findViewById(R.id.editTime);
         dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
-
         date.setOnClickListener(new View.OnClickListener() {
-
-
             @Override
-            public void onClick(View v) {
-
-            }
-
+            public void onClick(View v) {}
         });
         time.setOnClickListener(new View.OnClickListener() {
-
             @Override
-            public void onClick(View v) {
-
-            }
-
+            public void onClick(View v) {}
         });
+        setupListViewListener();
         */
-        //setupListViewListener();
 
         Intent i =getIntent();
         account =  i.getParcelableExtra("Account");
 
         userID = account.getUserID();
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -143,7 +135,6 @@ public class TaskPage extends AppCompatActivity implements
 
         taskList = new ArrayList<>();
         //If returning user read DB for info.
-
 
         itemsAdapter = new ItemsAdapter<>(this, taskList);
         itemsAdapter.setCallback(this);
@@ -196,8 +187,6 @@ public class TaskPage extends AppCompatActivity implements
     @Override
     public void onBackPressed() {
        /*
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -260,7 +249,6 @@ public class TaskPage extends AppCompatActivity implements
             // Handle navigation view item clicks here.
             int id = item.getItemId();
 
-
            if (id == R.id.nav_stats) {
                 startActivity(new Intent(TaskPage.this, stats.class));
             }
@@ -286,44 +274,6 @@ public class TaskPage extends AppCompatActivity implements
         newFragment.setCancelable(false);
         newFragment.show(getFragmentManager(), "Edit Task");
     }
-
-    /*
-    private void setupListViewListener() {
-        lvItems.setOnItemClickListener(
-                new ListView.OnItemClickListener() {
-
-
-                    button1.setOnClickListener(this);
-                    button2.setOnClickListener(this);
-
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    }
-
-                    public boolean onClickFail(ItemsAdapter<TaskData> adapter,
-                                               View item, int pos, long id) {
-                        taskList.remove(pos);
-                        adapter.notifyDataSetChanged();
-                        return true;
-
-                    }
-
-                    public boolean onClickComplete(ItemsAdapter<TaskData> adapter,
-                                                   View item, int pos, long id) {
-                        taskList.remove(pos);
-                        adapter.notifyDataSetChanged();
-                        return true;
-
-                    }
-
-                }
-
-
-        );
-
-
-    }
-*/
 
     @Override
     public void onStart() {

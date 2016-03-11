@@ -31,6 +31,7 @@ public class Account implements Parcelable{
     private int  fitnessXP;
     private int healthXP;
 
+    // Getters and Setters
     public int getHealthXP() {
         return healthXP;
     }
@@ -55,16 +56,11 @@ public class Account implements Parcelable{
         this.fitnessXP = fitnessXP;
     }
 
-    public int getCharismaXP() {
-
-        return charismaXP;
-    }
+    public int getCharismaXP() { return charismaXP; }
 
     public void setCharismaXP(int charismaXP) {
         this.charismaXP = charismaXP;
     }
-
-
 
     public int getNumTasks() {
         return numTasks;
@@ -74,7 +70,6 @@ public class Account implements Parcelable{
         this.numTasks = numTasks;
     }
 
-    //Getters and Setters
     public int isNew() {
         return isNew;
     }
@@ -114,8 +109,6 @@ public class Account implements Parcelable{
         Account.userID = userID;
     }
 
-
-
     @Override
     public int describeContents() {
         return 0;
@@ -130,7 +123,6 @@ public class Account implements Parcelable{
         dest.writeInt(this.getFitnessXP());
         dest.writeInt(this.getHealthXP());
         dest.writeInt(this.getIntelligenceXP());
-
     }
 
     protected Account(Parcel in)

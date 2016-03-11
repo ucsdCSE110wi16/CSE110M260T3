@@ -46,36 +46,6 @@
         android:layout_margin="4dp"
         android:id="@+id/taskCategorySpinner" />
 
-
-
-    <!--
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/datePickerText"
-        android:layout_marginTop="16dp"
-        android:textSize="16sp"
-        android:id="@+id/datePickerLabel"
-        android:layout_gravity="center_horizontal" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <DatePicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:datePickerMode="spinner"
-            android:calendarViewShown="false"></DatePicker>
-
-        <TimePicker
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:timePickerMode="spinner"></TimePicker>
-
-    </LinearLayout>
-    -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="48dp"
@@ -91,8 +61,6 @@
         android:progressTint="@color/colorStar"
         android:layout_gravity="bottom|center_horizontal"
         android:id="@+id/difficultyBar" />
-
-
 
     <LinearLayout
         android:orientation="horizontal"
@@ -125,6 +93,5 @@
             android:layout_weight=".5"
             android:hint="HH:MM"/>
     </LinearLayout>
-
 
 </LinearLayout>

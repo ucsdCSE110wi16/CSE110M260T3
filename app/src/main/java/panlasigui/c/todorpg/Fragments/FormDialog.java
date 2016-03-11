@@ -35,7 +35,6 @@ public class FormDialog extends DialogFragment {
     private EditText taskDescription;
     private Spinner categorySpinner;
     private RatingBar difficultyBar;
-    //private LinearLayout background;
     private ArrayAdapter<CharSequence> adapter;
     private boolean edit = false;
     private int pos;
@@ -56,7 +55,6 @@ public class FormDialog extends DialogFragment {
         difficultyBar = (RatingBar) view.findViewById(R.id.difficultyBar);
         date = (EditText) getView().findViewById(R.id.editDate);
         time = (EditText) getView().findViewById(R.id.editTime);
-        //background = (LinearLayout) view.findViewById(R.id.createTaskBack);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         adapter = ArrayAdapter.createFromResource(getActivity(),
@@ -65,12 +63,6 @@ public class FormDialog extends DialogFragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         categorySpinner.setAdapter(adapter);
-
-        /*
-        date.setOnClickListener(this);
-        time.setOnClickListener(this);
-        */
-
 
         //edit tasks
         Bundle b = getArguments();
@@ -166,6 +158,5 @@ public class FormDialog extends DialogFragment {
 
         return d;
     }
-
 }
 

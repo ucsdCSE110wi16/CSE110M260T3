@@ -49,16 +49,11 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
 
         Button buttonFail = (Button) convertView.findViewById(R.id.buttonFailTask);
         Button buttonComplete = (Button) convertView.findViewById(R.id.buttonCompleteTask);
-        //final TextView noTasks = (TextView) convertView.findViewById(R.id.noTasks);
 
         buttonFail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 confirmRemove(getContext(), position, "fail");
-                /*
-                if(getCount() == 0 ) noTasks.setVisibility(View.VISIBLE);
-                else noTasks.setVisibility(View.GONE);
-                */
             }
 
         });
@@ -67,10 +62,6 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
             @Override
             public void onClick(View v) {
                 confirmRemove(getContext(), position, "complete");
-                /*
-                if(getCount() == 0 ) noTasks.setVisibility(View.VISIBLE);
-                else noTasks.setVisibility(View.GONE);
-                */
             }
 
         });
@@ -110,7 +101,6 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
                 break;
         }
 
-
         taskBackground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,11 +123,10 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
 
     @Override
     public void add(TaskData object) {
-
         String countStr = String.valueOf(this.getCount() + 1);
         super.add(object);
-        //Add to DB
 
+        //Add to DB
         Firebase ref = new Firebase("https://todorpg.firebaseio.com/Users/"+ TaskPage.userID);
         ref.child("numTasks").setValue(this.getCount());
         ref.child("Task " + countStr);
@@ -146,7 +135,6 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
         ref.child("description").setValue(object.getDescription());
         ref.child("category").setValue(object.getCategory());
         ref.child("difficulty").setValue(object.getDifficulty());
-
     }
 
     @Override
@@ -154,7 +142,6 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
         int remove = this.getPosition(object);//0 index remove spot.
 
         //Remove from  DB
-
         Firebase ref = new Firebase("https://todorpg.firebaseio.com/Users/"+TaskPage.userID+"/Tasks");
 
         //Renumber and rename
@@ -172,7 +159,6 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
                 ref.child("Task "+str).child("difficulty").setValue(task.getDifficulty());
             }
         }
-
 
         ref = new Firebase("https://todorpg.firebaseio.com/Users/"+TaskPage.userID);
         String last = String.valueOf(this.getCount());
@@ -209,6 +195,4 @@ public class ItemsAdapter<T> extends ArrayAdapter<TaskData> {
     public interface ItemsAdapterCallback {
         void editTask(Bundle b);
     }
-
-
 }

@@ -26,6 +26,18 @@ public class stats extends AppCompatActivity {
     protected static statNode hp = new statNode("hp", (int) (TaskPage.account.getHealthXP() / 15), 15,  TaskPage.account.getHealthXP() % 15);
     protected static statNode charm = new statNode("charm", (int) (TaskPage.account.getCharismaXP() / 15), 15,  TaskPage.account.getCharismaXP() % 15);
 
+    public static statNode getIntel() {
+        return intel;
+    }
+
+    public static statNode getFit() {
+        return fit;
+    }
+
+    public static statNode getHp() { return hp; }
+
+    public static statNode getCharm() { return charm; }
+
     static ProgressBar progIntelligence;
     static ProgressBar progFitness;
     static ProgressBar progHealth;
@@ -71,19 +83,6 @@ public class stats extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
-
-    public static statNode getIntel() {
-        return intel;
-    }
-
-    public static statNode getFit() {
-        return fit;
-    }
-
-    public static statNode getHp() { return hp; }
-
-    public static statNode getCharm() { return charm; }
 
     public static void updateStat(String stat, float amount){
         Firebase ref = new Firebase("https://todorpg.firebaseio.com/Users/"+ TaskPage.userID);

@@ -24,7 +24,6 @@ public class Skills extends AppCompatActivity {
         });
 
         //commit pls
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

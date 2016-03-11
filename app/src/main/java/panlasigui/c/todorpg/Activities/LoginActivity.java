@@ -57,6 +57,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
     private final static int MIN_USERNAME_SIZE = 5;
     private final static int MIN_PASSWORD_SIZE = 5;
+
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -73,6 +74,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
     private static final String PREFS_NAME = "Preferences";
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -83,7 +85,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
 
         Firebase.setAndroidContext(this);
         Firebase myFirebaseRef = new Firebase("https://todorpg.firebaseio.com/");
@@ -97,7 +98,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         CheckBox rememberMe = (CheckBox) findViewById(R.id.autoLoginBox);
         if(settings.getBoolean("rememberMe",false))
         {
-
             mEmailView.setText(settings.getString("username",""));
             mPasswordView.setText(settings.getString("password", ""));
             rememberMe.setChecked(true);
@@ -121,8 +121,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 attemptLogin();
             }
         });
-
-
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
@@ -239,15 +237,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if (!email.contains("@"))
             validity = false;
         return validity;
-
     }
 
     private boolean isPasswordValid(String password) {
-
         boolean validity = true;
         if (password.length() < MIN_PASSWORD_SIZE)
             validity = false;
-
         return validity;
     }
 
@@ -317,9 +312,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> cursorLoader) {
-
-    }
+    public void onLoaderReset(Loader<Cursor> cursorLoader) {}
 
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
@@ -508,8 +501,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     finish();
                 }
             });
-
-
 
             return true;
         }

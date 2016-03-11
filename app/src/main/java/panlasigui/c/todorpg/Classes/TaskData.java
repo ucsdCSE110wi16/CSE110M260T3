@@ -16,16 +16,6 @@ public class TaskData {
     private String date;
     private String time;
 
-    // constructor for if there is no description
-    /*
-    public TaskData (String name,  int difficulty, String category) {
-
-        this.name = name;
-        this.difficulty = difficulty;
-        this.category = category;
-
-    }
-    */
     public TaskData (String name, String description, String category, float difficulty,
                      String date, String time) {
 
@@ -35,12 +25,9 @@ public class TaskData {
         this.category = category;
         this.date = date;
         this.time = time;
-
     }
-    public TaskData()
-    {
+    public TaskData() {}
 
-    }
     public String getName() {
         return name;
     }
@@ -129,6 +116,4 @@ public class TaskData {
             }
         }
     };
-
-
 }

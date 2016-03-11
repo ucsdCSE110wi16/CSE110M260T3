@@ -2,11 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1"><![CDATA[
-    android:weightSum="1"
-    android:orientation="vertical">
-
-    ]]>
+    android:weightSum="1">
 
     <EditText
         android:layout_width="match_parent"

@@ -14,16 +14,7 @@
     tools:showIn="@layout/app_bar_task_page"
     tools:context=".Activities.TaskPage"
     android:id="@+id/taskBoard">
-    <!--
-    <TextView
-        android:id="@+id/noTasks"
-        android:text="@string/noTasksToShow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:textSize="28sp"
-        />
-        -->
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

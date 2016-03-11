@@ -13,7 +13,6 @@
     tools:context=".Activities.stats"
     tools:showIn="@layout/activity_stats">
 
-
     <!-- Character name-->
     <TextView
         android:layout_width="wrap_content"
@@ -21,7 +20,6 @@
         android:text="@string/avatarName"
         android:textSize="20sp"
         android:id="@+id/textView5"
-
         android:layout_centerHorizontal="true"/>
 
     <!-- character image-->
@@ -45,14 +43,13 @@
         android:layout_below="@+id/textView5"
         android:layout_centerHorizontal="true"/>
 
-
     <!-- intelligence icon-->
     <ImageView
         android:layout_width="@android:dimen/app_icon_size"
         android:layout_height="@android:dimen/app_icon_size"
         android:layout_gravity="center_vertical"
         android:src="@drawable/magic"
-        android:id="@+id/avatarImageProfile"
+        android:id="@+id/intelligenceIcon"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignBottom="@+id/progressBar" />
@@ -73,22 +70,6 @@
         android:max="100"
         android:layout_alignParentEnd="true"/>
 
-    <!--
-
-    <TextView
-        android:id="@+id/a1"
-        android:layout_width="20dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:textSize="16sp"
-        android:gravity="center_horizontal"
-        android:layout_above="@+id/textView2"
-        android:layout_alignParentRight="false"
-        android:layout_alignParentEnd="false"
-        android:background="#0474ac" />
-    -->
-
-
     <!-- intelligence text-->
     <TextView
         android:layout_width="wrap_content"
@@ -105,7 +86,7 @@
         android:layout_height="@android:dimen/app_icon_size"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/str"
-        android:id="@+id/avatarImageProfile"
+        android:id="@+id/fitnessIcon"
         android:contentDescription="2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -142,7 +123,7 @@
         android:layout_height="@android:dimen/app_icon_size"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/health"
-        android:id="@+id/avatarImageProfile"
+        android:id="@+id/healthIcon"
         android:contentDescription="@string/statImage"
         android:layout_alignBottom="@+id/progressBar3"
         android:layout_alignParentLeft="true"
@@ -176,7 +157,7 @@
         android:layout_width="@android:dimen/app_icon_size"
         android:layout_height="@android:dimen/app_icon_size"
         android:src="@drawable/smile"
-        android:id="@+id/avatarImageProfile"
+        android:id="@+id/charismaIcon"
         android:layout_alignLeft="@+id/progressBar4"
         android:layout_alignBottom="@id/progressBar4"
         android:layout_alignParentLeft="true"
