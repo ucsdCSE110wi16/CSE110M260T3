@@ -127,15 +127,8 @@ public class TaskPage extends AppCompatActivity implements
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
-                if (slideOffset == 0) {
-                    // drawer closed
-                    updateDrawerLevels();
-                    invalidateOptionsMenu();
-                } else if (slideOffset != 0) {
-                    // started opening
-                    updateDrawerLevels();
-                    invalidateOptionsMenu();
-                }
+                updateDrawerLevels();
+                invalidateOptionsMenu();
                 super.onDrawerSlide(drawerView, slideOffset);
             }
         };
