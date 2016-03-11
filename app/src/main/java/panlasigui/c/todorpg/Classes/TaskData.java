@@ -13,18 +13,12 @@ public class TaskData {
     private String description;
     private String category;
     private float difficulty;
-    private String date;
-    private String time;
 
-    public TaskData (String name, String description, String category, float difficulty,
-                     String date, String time) {
-
+    public TaskData (String name, String description, String category, float difficulty) {
         this.name = name;
         this.description = description;
         this.difficulty = difficulty;
         this.category = category;
-        this.date = date;
-        this.time = time;
     }
     public TaskData() {}
 
@@ -32,25 +26,11 @@ public class TaskData {
         return name;
     }
 
-    public String getDescription() {
-        return description;
-    }
+    public String getDescription() { return description; }
 
-    public String getCategory() {
-        return category;
-    }
+    public String getCategory() { return category; }
 
-    public float getDifficulty() {
-        return difficulty;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public String getDate() {
-        return date;
-    }
+    public float getDifficulty() { return difficulty; }
 
     public void setName(String name) {
         this.name = name;
@@ -64,13 +44,7 @@ public class TaskData {
         this.category = category;
     }
 
-    public void setDifficulty(float difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public void setTime(String time) { this.time = time; }
-
-    public void setDate(String date) { this.date = date; }
+    public void setDifficulty(float difficulty) { this.difficulty = difficulty; }
 
     public static Comparator<TaskData> compTaskName = new Comparator<TaskData>() {
         public int compare(TaskData task1, TaskData task2){
@@ -105,7 +79,7 @@ public class TaskData {
 
     public static Comparator<TaskData> compTaskTime = new Comparator<TaskData>() {
         public int compare(TaskData task1, TaskData task2){
-            String task1Date = task1.getDate();
+            /*String task1Date = task1.getDate();
             String task2Date = task2.getDate();
 
             int datecmp = task1Date.compareToIgnoreCase(task2Date);
@@ -113,7 +87,12 @@ public class TaskData {
             else if (datecmp > 0) return 1;
             else {
                 return task1.getTime().compareToIgnoreCase(task2.getTime());
-            }
+            }*/
+
+            String task1Name = task1.getName().toUpperCase();
+            String task2Name = task2.getName().toUpperCase();
+
+            return task1Name.compareTo(task2Name);
         }
     };
 }

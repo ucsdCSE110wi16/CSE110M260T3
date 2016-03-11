@@ -62,6 +62,7 @@
         android:layout_gravity="bottom|center_horizontal"
         android:id="@+id/difficultyBar" />
 
+    <!--
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -93,5 +94,6 @@
             android:layout_weight=".5"
             android:hint="HH:MM"/>
     </LinearLayout>
+    -->
 
 </LinearLayout>
