@@ -116,10 +116,30 @@ public class TaskPage extends AppCompatActivity implements
             }
         });
 
+        avInt = (TextView) findViewById(R.id.avatarInt);
+        avFit = (TextView) findViewById(R.id.avatarFit);
+        avHea = (TextView) findViewById(R.id.avatarHea);
+        avCha = (TextView) findViewById(R.id.avatarCha);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                if (slideOffset == 0) {
+                    // drawer closed
+                    updateDrawerLevels();
+                    invalidateOptionsMenu();
+                } else if (slideOffset != 0) {
+                    // started opening
+                    updateDrawerLevels();
+                    invalidateOptionsMenu();
+                }
+                super.onDrawerSlide(drawerView, slideOffset);
+            }
+        };
+
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -157,20 +177,6 @@ public class TaskPage extends AppCompatActivity implements
                         task.setDifficulty((float) diff) ;
                         TaskPage.taskList.add(task);
                     }
-
-                    avInt = (TextView) findViewById(R.id.avatarInt);
-                    avFit = (TextView) findViewById(R.id.avatarFit);
-                    avHea = (TextView) findViewById(R.id.avatarHea);
-                    avCha = (TextView) findViewById(R.id.avatarCha);
-
-                    if (avInt != null && avFit != null && avHea != null && avCha != null) {
-                        avInt.setText("Intelligence Level " + account.getIntelligenceXP() / 15);
-                        avFit.setText("Fitness Level " + account.getFitnessXP() / 15);
-                        avHea.setText("Health Level " + account.getHealthXP() / 15);
-                        avCha.setText("Charisma Level " + account.getCharismaXP() / 15);
-                    }
-
-
                 }
                 @Override
                 public void onCancelled(FirebaseError firebaseError) {
@@ -260,8 +266,16 @@ public class TaskPage extends AppCompatActivity implements
         return true;
     }
 
-    public void promptNewTask() {
+    private void updateDrawerLevels() {
+        if (avInt != null && avFit != null && avHea != null && avCha != null) {
+            avInt.setText("Intelligence Level " + account.getIntelligenceXP() / 15);
+            avFit.setText("Fitness Level " + account.getFitnessXP() / 15);
+            avHea.setText("Health Level " + account.getHealthXP() / 15);
+            avCha.setText("Charisma Level " + account.getCharismaXP() / 15);
+        }
+    }
 
+    public void promptNewTask() {
         DialogFragment newFragment = new FormDialog();
         newFragment.setCancelable(false);
         newFragment.show(getFragmentManager(), "Create Task");
