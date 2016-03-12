@@ -24,9 +24,6 @@ Recent Changelog:
 - As a user, I want to be able to be able to filter tasks by category so that I can focus my efforts.
 - As a user, I want to be able to reset my avatar so that I have the chance to start anew.
 
-Scenarios Tested
--Given that I have a valid email and password inputted, when I initiate a login, then the program will remember my 
- stats or zero fill the stats if I am a new user.
 
 #### Project Schedule
 **Week 6: Deliver Milestone 1**

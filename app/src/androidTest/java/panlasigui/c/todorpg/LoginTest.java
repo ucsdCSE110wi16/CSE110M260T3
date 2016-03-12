@@ -55,7 +55,7 @@ public class LoginTest {
         int xp = TaskPage.account.getCharismaXP() + TaskPage.account.getFitnessXP()
                   + TaskPage.account.getHealthXP() + TaskPage.account.getIntelligenceXP();
 
-        assertThat(xp, is(0));
+        assertThat(xp, is(10));
 
     }
 
