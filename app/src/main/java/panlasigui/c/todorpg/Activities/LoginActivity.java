@@ -439,7 +439,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                             Intent i = new Intent(getApplicationContext(), TaskPage.class);
                             i.putExtra("Account", account);
-                            finish();
+                        //    finish();
                             startActivity(i);
                             finish();
                         }
@@ -455,8 +455,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 public void onAuthenticationError(FirebaseError firebaseError) {
                     Toast.makeText(LoginActivity.this, "No Authentication",
                             Toast.LENGTH_LONG).show();
+
                     Intent intent = getIntent();
-                    finish();
+                    //finish();
                     startActivity(intent);
                     finish();
                 }
@@ -485,18 +486,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     //Start Task page activity.
                     Intent i = new Intent(getApplicationContext(), TaskPage.class);
                     i.putExtra("Account", account);
-                    finish();
+                    //finish();
                     startActivity(i);
                     finish();
+
                 }
 
                 @Override
                 public void onError(FirebaseError firebaseError) {
                     Toast.makeText(LoginActivity.this, "Did not make new User",
                             Toast.LENGTH_LONG).show();
+
                     Intent intent = getIntent();
 
-                    finish();
+                    //finish();
                     startActivity(intent);
                     finish();
                 }
