@@ -20,6 +20,8 @@ import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -51,10 +53,9 @@ public class LoginTest {
         }
         int xp = TaskPage.account.getCharismaXP() + TaskPage.account.getFitnessXP()
                   + TaskPage.account.getHealthXP() + TaskPage.account.getIntelligenceXP();
-        if( xp != 0)
-            onView(withId(R.id.email)).check(matches(withText("FAIL")));
-        else
-            onView(withId(R.id.email)).check(matches(withText(inputUsername)));
+
+        assertThat(xp, is(0));
+
     }
 
 
