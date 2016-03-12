@@ -1,10 +1,12 @@
 #Scenarios
 #### Login
-Given that I have an account registered
-And I open the app to the Login Page
-When I enter in my email username and password
-And I press the login button
-Then the stats previously set should be remembered.
+Given that I have an account registered  
+And I open the app to the Login Page  
+When I enter in my email username and password  
+And I press the login button  
+Then I should be taken to the task page  
+And the tasks and stats previously set should be loaded  
+
 #### Create Task
 Given I am signed in on a valid account  
 And I am on the task page  
