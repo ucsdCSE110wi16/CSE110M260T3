@@ -47,10 +47,11 @@ public class LoginTest {
         onView(withId(R.id.email_sign_in_button)).perform(click());
 
 
-
+        /*
         while (TaskPage.account == null) {
 
-        }
+        }*/
+        //verify
         int xp = TaskPage.account.getCharismaXP() + TaskPage.account.getFitnessXP()
                   + TaskPage.account.getHealthXP() + TaskPage.account.getIntelligenceXP();
 
