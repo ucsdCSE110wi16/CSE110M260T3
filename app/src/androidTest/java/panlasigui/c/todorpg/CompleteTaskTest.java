@@ -45,7 +45,7 @@ public class CompleteTaskTest {
     }
 
     @Test
-    public void testCreatingTask() {
+    public void testCompletingTask() {
         //login first
         onView(withId(R.id.email)).perform(typeText(inputUsername));
         onView(withId(R.id.password)).perform(typeText(inputPassword), ViewActions.closeSoftKeyboard());
@@ -60,10 +60,7 @@ public class CompleteTaskTest {
         }
 
         //edit task
-        onData(withId(R.id.buttonCompleteTask))
-                .inAdapterView(withId(R.id.lvItems))
-                .atPosition(0)
-                .perform(click());
+        onView(withId(R.id.buttonCompleteTask)).perform(click());
         onView(withId(android.R.id.button1)).perform(click());
 
         try {
