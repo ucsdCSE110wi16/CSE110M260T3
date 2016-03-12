@@ -54,7 +54,7 @@ public class CreateTaskTest {
         this.inputPassword = "CreateTask";
         taskName = "Testing Task";
         taskDesc = "This is a test!";
-        taskCat = "Fitness";
+        taskCat = "Intelligence";
         taskDif = (float)3.0;
     }
 
