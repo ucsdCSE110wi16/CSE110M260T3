@@ -39,6 +39,7 @@ public class LoginTest {
         this.inputUsername = "LoginTest@tester.com";
         this.inputPassword = "LoginTest";
     }
+
     @Test
     public void changeText_sameActivity() {
         // Type text and then press the button.
@@ -46,18 +47,10 @@ public class LoginTest {
         onView(withId(R.id.password)).perform(typeText(inputPassword), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.email_sign_in_button)).perform(click());
 
-
-
-        while (TaskPage.account == null) {
-
-        }
+        while (TaskPage.account == null) {}
         int xp = TaskPage.account.getCharismaXP() + TaskPage.account.getFitnessXP()
                   + TaskPage.account.getHealthXP() + TaskPage.account.getIntelligenceXP();
 
-        assertThat(xp, is(0));
-
+        assertThat(xp, is(10));
     }
-
-
-
 }
