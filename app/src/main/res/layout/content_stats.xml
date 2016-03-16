@@ -51,7 +51,7 @@
         android:layout_width="@android:dimen/app_icon_size"
         android:layout_height="@android:dimen/app_icon_size"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/intel"
+        android:src="@drawable/magic"
         android:id="@+id/avatarImageProfile"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

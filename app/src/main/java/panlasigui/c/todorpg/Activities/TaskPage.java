@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -65,7 +66,6 @@ public class TaskPage extends AppCompatActivity implements
     private TimePickerDialog timePicker;
 
     private SimpleDateFormat dateFormat;
-
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -132,7 +132,7 @@ public class TaskPage extends AppCompatActivity implements
         //int[] colors = {0, 0xFFFF0000, 0}; // red for the example
         int[] colors = {0, 0, 0};
         lvItems.setDivider(new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, colors));
-        lvItems.setDividerHeight(50);
+        lvItems.setDividerHeight(5);
 
         taskList = new ArrayList<>();
         //If returning user read DB for info.

@@ -7,7 +7,7 @@
     android:weightSum="10">
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_weight="8"
+        android:layout_weight="9"
         android:layout_height="fill_parent"
         android:weightSum="1">
         <ImageView
@@ -23,7 +23,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal|top"
         android:layout_margin="20dp"
@@ -66,6 +66,7 @@
             android:layout_gravity="center_horizontal"
             android:isIndicator="true"
             android:numStars="5"
+            android:progressTint="@color/colorStar"
             android:layout_margin="12dp"
             android:id="@+id/taskInstanceDiff" />
 
