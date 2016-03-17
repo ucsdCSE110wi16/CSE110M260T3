@@ -235,12 +235,14 @@ public class TaskPage extends AppCompatActivity implements
 
             return true;
         }
-
+        
+        /*
         if (id == R.id.action_sortByTime) {
             Toast.makeText(this, "Tasks have been sorted by Time", Toast.LENGTH_SHORT).show();
             //call sort
             return true;
         }
+        */
 
         return super.onOptionsItemSelected(item);
     }
