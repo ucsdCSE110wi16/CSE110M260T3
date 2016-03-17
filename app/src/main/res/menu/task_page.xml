@@ -16,8 +16,10 @@
         android:orderInCategory="100"
         app:showAsAction="never" />
 
+    <!--
     <item android:id="@+id/action_sortByTime"
         android:title="@string/action_sortByTime"
         android:orderInCategory="100"
         app:showAsAction="never" />
+    -->
 </menu>
