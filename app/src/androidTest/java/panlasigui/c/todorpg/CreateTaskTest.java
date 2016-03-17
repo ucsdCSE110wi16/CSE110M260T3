@@ -1,11 +1,15 @@
 package panlasigui.c.todorpg;
 
+import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+
+
 import android.content.ClipData;
+import android.support.test.espresso.Root;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -29,6 +33,7 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.core.Is.is;
+import static android.support.test.espresso.matcher.RootMatchers.isPlatformPopup;
 
 
 /**
@@ -71,9 +76,25 @@ public class CreateTaskTest {
         onView(withId(R.id.fab)).perform(click());
         onView(withId(R.id.taskName)).perform(typeText(this.taskName));
         onView(withId(R.id.taskDescription)).perform(typeText(this.taskDesc), ViewActions.closeSoftKeyboard());
+
+
         onView(withId(R.id.taskCategorySpinner)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is(taskCat))).perform(click());
-        onView(withId(R.id.taskCategorySpinner)).perform(click());
+
+        //onView(withId(R.id.taskCategorySpinner)).check(matches(isDisplayed()));
+        //onData(allOf(is(instanceOf(String.class)), is(taskCat))).perform(click());
+
+        onView(withText(taskCat)).inRoot(isPlatformPopup()).perform(click());
+
+
+
+
+        /*
+        onView(withText(taskCat))
+                .inRoot(withDecorView(not(is(getActivity().getWindow().getDecorView()))))
+                .perform(click());
+        */
+
+        //onView(withId(R.id.taskCategorySpinner)).perform(click());
         onView(withId(R.id.difficultyBar)).perform(click());
         onView(withId(android.R.id.button1)).perform(click());
 
@@ -83,5 +104,8 @@ public class CreateTaskTest {
         assertThat(data.getDescription(), is(this.taskDesc));
         assertThat(data.getCategory(), is(this.taskCat));
         assertThat(data.getDifficulty(), is(this.taskDif));
+
     }
+
+
 }
